@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HR بهار</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#140B06">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232B1810'/%3E%3Ctext x='50' y='66' font-size='54' text-anchor='middle'%3E%E2%98%95%3C/text%3E%3C/svg%3E">
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22HR%20%D8%A8%D9%87%D8%A7%D8%B1%22%2C%22short_name%22%3A%22HR%20%D8%A8%D9%87%D8%A7%D8%B1%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%231C120B%22%2C%22theme_color%22%3A%22%23140B06%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%2527http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%2527%2520viewBox%253D%25270%25200%2520100%2520100%2527%253E%253Crect%2520width%253D%2527100%2527%2520height%253D%2527100%2527%2520rx%253D%252722%2527%2520fill%253D%2527%25232B1810%2527%252F%253E%253Ctext%2520x%253D%252750%2527%2520y%253D%252766%2527%2520font-size%253D%252754%2527%2520text-anchor%253D%2527middle%2527%253E%25E2%2598%2595%253C%252Ftext%253E%253C%252Fsvg%253E%22%2C%22sizes%22%3A%22any%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --coffee-950:#140B06; --coffee-900:#2B1810; --coffee-800:#3D2314;
+    --clay-600:#C1440E; --clay-500:#D4571E;
+    --gold-500:#C89B3C; --gold-300:#E3C787;
+    --cinnamon-600:#8B4A2B; --cinnamon-500:#A85C34;
+    --sumac-600:#7A2E2E; --sumac-500:#9C4141;
+    --cream-50:#1C120B; --cream-100:#28190F; --cream-200:#3D2818;
+    --ink-900:#F5EAD9; --ink-600:#C9AD8C;
+    --green-600:#5B6B3A; --red-600:#E2574A;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  html,body{height:100%;}
+  body{
+    margin:0; font-family:'Tajawal',sans-serif; background:var(--cream-50); color:var(--ink-900);
+    -webkit-tap-highlight-color:transparent;
+  }
+  button{font-family:inherit;}
+  input,select{font-family:inherit;}
+  #app{max-width:480px; margin:0 auto; min-height:100%; position:relative; background:var(--cream-50);}
+
+  /* ---------- Login ---------- */
+  #login{min-height:100vh; min-height:100%; display:flex; flex-direction:column; justify-content:center; padding:32px 24px; gap:24px;}
+  .brand{text-align:center;}
+  .brand .mark{
+    width:76px; height:76px; margin:0 auto 14px; border-radius:22px;
+    background:linear-gradient(155deg,var(--clay-500),var(--gold-500));
+    display:flex; align-items:center; justify-content:center; font-size:34px;
+    box-shadow:0 10px 24px -8px rgba(193,68,14,.45);
+  }
+  .brand h1{font-size:22px; font-weight:900; margin:0 0 4px; color:var(--ink-900);}
+  .brand p{margin:0; color:var(--ink-600); font-size:14px;}
+  .field{display:flex; flex-direction:column; gap:6px;}
+  .field label{font-size:13px; font-weight:700; color:var(--ink-600);}
+  .field input{
+    padding:14px 16px; border-radius:14px; border:1.5px solid var(--cream-200); background:var(--cream-100);
+    font-size:16px; color:var(--ink-900); outline:none; transition:border-color .15s;
+  }
+  .field input:focus{border-color:var(--clay-500);}
+  .btn-primary{
+    padding:15px; border:none; border-radius:14px; background:linear-gradient(135deg,var(--clay-600),var(--clay-500));
+    color:#fff; font-size:16px; font-weight:800; cursor:pointer; box-shadow:0 8px 20px -8px rgba(193,68,14,.55);
+  }
+  .btn-primary:active{transform:scale(.98);}
+  .btn-ghost{padding:13px; border-radius:14px; border:1.5px solid var(--cream-200); background:transparent; color:var(--ink-900); font-weight:700; font-size:14px; cursor:pointer;}
+  #login-error{color:var(--red-600); font-size:13px; text-align:center; min-height:16px; font-weight:700;}
+
+  /* ---------- App shell ---------- */
+  #app-shell{display:none; min-height:100%; flex-direction:column;}
+  header.topbar{
+    position:sticky; top:0; z-index:20; background:var(--coffee-950); color:#fff;
+    padding:calc(16px + env(safe-area-inset-top,0px)) 18px 16px;
+    border-radius:0 0 22px 22px; display:flex; align-items:center; justify-content:space-between;
+  }
+  header.topbar .hello{font-size:13px; opacity:.75; margin:0 0 2px;}
+  header.topbar .name{font-size:19px; font-weight:800; margin:0;}
+  .bell{
+    position:relative; width:42px; height:42px; border-radius:14px; background:rgba(255,255,255,.12);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:19px; border:none;
+  }
+  .bell .dot{
+    position:absolute; top:6px; left:6px; width:9px; height:9px; border-radius:50%;
+    background:var(--clay-500); border:2px solid var(--coffee-900); display:none;
+  }
+  main{flex:1; padding:18px 18px 100px;}
+  .section-title{font-size:15px; font-weight:800; margin:22px 0 12px; color:var(--ink-900);}
+  .section-title:first-child{margin-top:0;}
+
+  .cards-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .task-card{
+    border:none; border-radius:18px; padding:16px 14px; text-align:right; cursor:pointer;
+    color:#fff; display:flex; flex-direction:column; gap:26px; min-height:104px; position:relative; overflow:hidden;
+  }
+  .task-card .ic{font-size:24px;}
+  .task-card .lbl{font-size:14px; font-weight:800;}
+  .task-card.checkin{background:linear-gradient(145deg,#5B6B3A,#7C8F4E);}
+  .task-card.checkout{background:linear-gradient(145deg,#7A3B1F,#A8501F);}
+  .task-card.money{background:linear-gradient(145deg,#B8860B,#D4A017);}
+  .task-card.leave{background:linear-gradient(145deg,var(--cinnamon-600),var(--cinnamon-500));}
+  .task-card.permission{background:linear-gradient(145deg,var(--sumac-600),var(--sumac-500));}
+  .task-card.team{background:linear-gradient(145deg,var(--coffee-900),var(--coffee-800));}
+  .task-card:disabled{opacity:.45; cursor:not-allowed;}
+
+  .status-strip{
+    background:var(--cream-100); border-radius:16px; padding:14px 16px; display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;
+  }
+  .status-strip .t{font-size:12px; color:var(--ink-600); font-weight:700;}
+  .status-strip .v{font-size:15px; font-weight:800; margin-top:2px;}
+  .status-pill{font-size:11px; font-weight:800; padding:5px 10px; border-radius:20px;}
+  .pill-in{background:#DCE7C9; color:#3E4B24;}
+  .pill-out{background:var(--cream-200); color:var(--ink-600);}
+
+  .branch-picker{display:flex; gap:8px; overflow-x:auto; padding-bottom:2px; margin-bottom:14px;}
+  .branch-chip{
+    flex:0 0 auto; padding:9px 16px; border-radius:20px; border:1.5px solid var(--cream-200); background:var(--cream-100);
+    font-size:13px; font-weight:700; color:var(--ink-600); cursor:pointer; white-space:nowrap;
+  }
+  .branch-chip.active{background:linear-gradient(135deg,var(--clay-600),var(--clay-500)); color:#fff; border-color:var(--clay-500);}
+
+  nav.bottomnav{
+    position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:480px;
+    background:var(--coffee-950); border-top:1px solid var(--cream-200); display:flex; z-index:30;
+    padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px));
+  }
+  nav.bottomnav button{
+    flex:1; background:none; border:none; display:flex; flex-direction:column; align-items:center; gap:3px;
+    padding:6px 0; color:var(--ink-600); font-size:11px; font-weight:700; cursor:pointer;
+  }
+  nav.bottomnav button .ic{font-size:20px;}
+  nav.bottomnav button.active{color:var(--clay-600);}
+
+  .view{display:none;}
+  .view.active{display:block;}
+
+  .card-plain{background:var(--cream-100); border-radius:16px; padding:16px; margin-bottom:12px;}
+  .empty{text-align:center; color:var(--ink-600); font-size:13px; padding:30px 10px;}
+
+  .req-item{display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--cream-200);}
+  .req-item:last-child{border-bottom:none;}
+  .req-item .l{font-size:13px; font-weight:700;}
+  .req-item .d{font-size:11px; color:var(--ink-600); margin-top:2px;}
+  .st{font-size:11px; font-weight:800; padding:4px 10px; border-radius:12px;}
+  .st-pending{background:#F3E4C4; color:#8A5A00;}
+  .st-approved{background:#DCE7C9; color:#3E4B24;}
+  .st-rejected{background:#F3D5D0; color:var(--red-600);}
+
+  .fab-tabs{display:flex; gap:8px; margin-bottom:14px;}
+  .fab-tabs button{
+    flex:1; padding:10px; border-radius:12px; border:1.5px solid var(--cream-200); background:var(--cream-100);
+    font-weight:800; font-size:13px; color:var(--ink-600); cursor:pointer;
+  }
+  .fab-tabs button.on{background:var(--coffee-900); color:#fff; border-color:var(--coffee-900);}
+
+  #toast{
+    position:fixed; bottom:90px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--coffee-900); color:#fff;
+    padding:12px 20px; border-radius:14px; font-size:13px; font-weight:700; opacity:0; transition:.25s; z-index:80; max-width:85%; text-align:center;
+  }
+  #toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  #sheet-overlay{position:fixed; inset:0; background:rgba(20,10,5,.5); display:none; z-index:60;}
+  #sheet{
+    position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:480px; background:var(--cream-50);
+    border-radius:22px 22px 0 0; padding:20px 20px calc(20px + env(safe-area-inset-bottom,0px)); z-index:61;
+    max-height:80vh; overflow-y:auto;
+  }
+  #sheet h3{margin:0 0 14px; font-size:16px; font-weight:800;}
+  .sheet-close{position:absolute; top:14px; left:14px; background:var(--cream-200); border:none; width:32px; height:32px; border-radius:10px; font-size:14px; cursor:pointer;}
+
+  #print-report{display:none;}
+  @media print{
+    body > *:not(#print-report){display:none !important;}
+    #print-report{display:block !important; position:static; background:#fff; color:#111; padding:10px; direction:rtl;}
+    #print-report h2{font-size:18px; margin:0 0 4px;}
+    #print-report .sub{font-size:12px; color:#555; margin-bottom:16px;}
+    #print-report table{width:100%; border-collapse:collapse; margin-bottom:18px; font-size:12px;}
+    #print-report th,#print-report td{border:1px solid #ccc; padding:6px 8px; text-align:right;}
+    #print-report th{background:#eee;}
+    #print-report h3{font-size:14px; margin:18px 0 6px;}
+  }
+</style>
+</head>
+<body>
+<div id="print-report"></div>
+<div id="app">
+
+  <div id="login">
+    <div class="brand">
+      <div class="mark">☕</div>
+      <h1>HR بهار</h1>
+      <p>نظام حضور مؤسسة بهار ودلة</p>
+    </div>
+    <div class="field">
+      <label>رقم الموظف</label>
+      <input id="in-empid" inputmode="numeric" placeholder="مثال: 2580">
+    </div>
+    <div class="field">
+      <label>الرمز السري</label>
+      <input id="in-pin" type="password" inputmode="numeric" placeholder="••••">
+    </div>
+    <div id="login-error"></div>
+    <button class="btn-primary" id="btn-login">تسجيل الدخول</button>
+  </div>
+
+  <div id="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="hello" id="hello-role">—</p>
+        <p class="name" id="hello-name">—</p>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <button class="bell" id="btn-refresh">🔄</button>
+        <button class="bell" id="btn-bell">🔔<span class="dot" id="bell-dot"></span></button>
+      </div>
+    </header>
+
+    <main>
+      <div class="view active" id="view-home">
+        <div class="branch-picker" id="branch-picker"></div>
+
+        <div class="status-strip">
+          <div>
+            <div class="t">حالتي اليوم</div>
+            <div class="v" id="today-status">لم يسجّل بعد</div>
+          </div>
+          <span class="status-pill pill-out" id="status-pill">خارج الدوام</span>
+        </div>
+
+        <div class="section-title">المهام</div>
+        <div class="cards-grid">
+          <button class="task-card checkin" id="card-checkin"><span class="ic">📍</span><span class="lbl">تسجيل حضور</span></button>
+          <button class="task-card checkout" id="card-checkout"><span class="ic">🚪</span><span class="lbl">تسجيل انصراف</span></button>
+          <button class="task-card money" id="card-money"><span class="ic">💵</span><span class="lbl">طلب سلفة</span></button>
+          <button class="task-card leave" id="card-leave"><span class="ic">🗓️</span><span class="lbl">طلب إجازة</span></button>
+          <button class="task-card permission" id="card-permission"><span class="ic">⏱️</span><span class="lbl">طلب استئذان</span></button>
+          <button class="task-card team" id="card-team-shortcut"><span class="ic">👥</span><span class="lbl">الفريق</span></button>
+        </div>
+      </div>
+
+      <div class="view" id="view-requests">
+        <div class="fab-tabs">
+          <button class="on" data-rtab="leave">إجازة/استئذان</button>
+          <button data-rtab="money">السلف</button>
+        </div>
+        <div id="requests-list"></div>
+      </div>
+
+      <div class="view" id="view-team">
+        <div class="section-title" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>ملخص هذا الشهر</span>
+          <button class="btn-ghost" style="padding:6px 12px; font-size:12px;" id="btn-report-team">📄 تقرير PDF</button>
+        </div>
+        <div id="team-summary"></div>
+
+        <div class="section-title">من في الدوام الآن</div>
+        <div id="team-onshift"></div>
+
+        <div class="section-title">طلبات بانتظار القرار</div>
+        <div id="team-pending"></div>
+
+        <div class="section-title" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>الفروع</span>
+          <button class="btn-ghost" style="padding:6px 12px; font-size:12px;" id="btn-add-branch">+ فرع جديد</button>
+        </div>
+        <div id="team-branches"></div>
+
+        <div class="section-title" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>الموظفون</span>
+          <button class="btn-ghost" style="padding:6px 12px; font-size:12px;" id="btn-add-employee">+ موظف جديد</button>
+        </div>
+        <div id="team-list"></div>
+      </div>
+
+      <div class="view" id="view-profile">
+        <div class="card-plain">
+          <div class="req-item"><span class="l">رقم الموظف</span><span id="p-id"></span></div>
+          <div class="req-item"><span class="l">الاسم</span><span id="p-name"></span></div>
+          <div class="req-item"><span class="l">الصلاحية</span><span id="p-role"></span></div>
+        </div>
+
+        <div class="section-title">ملخص هذا الشهر</div>
+        <div class="card-plain" id="my-summary"></div>
+
+        <div class="section-title">رقم الواتساب</div>
+        <div class="card-plain">
+          <div class="field" style="margin-bottom:10px;"><input id="p-whatsapp" placeholder="9665xxxxxxxx (يُستخدم لاحقاً لإشعارات واتساب)"></div>
+          <button class="btn-ghost" style="width:100%;" id="btn-save-whatsapp">حفظ الرقم</button>
+        </div>
+
+        <button class="btn-primary" style="width:100%; margin-bottom:10px;" id="btn-report-mine">📄 تقرير حضوري الشهري (PDF)</button>
+        <button class="btn-ghost" style="width:100%; margin-bottom:10px;" id="btn-add-home">📲 إضافة التطبيق للشاشة الرئيسية</button>
+        <button class="btn-ghost" style="width:100%;" id="btn-logout">تسجيل الخروج</button>
+      </div>
+    </main>
+
+    <nav class="bottomnav">
+      <button class="active" data-view="home"><span class="ic">🏠</span>الرئيسية</button>
+      <button data-view="requests"><span class="ic">📋</span>الطلبات</button>
+      <button data-view="team"><span class="ic">👥</span>الفريق</button>
+      <button data-view="profile"><span class="ic">👤</span>حسابي</button>
+    </nav>
+  </div>
+</div>
+
+<div id="toast"></div>
+<div id="sheet-overlay"></div>
+<div id="sheet" style="display:none;"></div>
+
+<script>
+const API = 'https://script.google.com/macros/s/AKfycbzTXtcEIU5HzDrHKOKF1nIxK2RpZOCKPgx-i72CcAu0yIJ9Q1J73LtVk7KbfZwDQIpa/exec';
+let ME = null, BRANCHES = [], CURRENT_BRANCH = null, SNAP = null, TOKEN = localStorage.getItem('hrb_token') || '';
+
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2600);
+}
+function isManager(){ return ME && (ME.Role==='admin' || ME.Role==='supervisor'); }
+
+function jsonpRequest(action, params={}){
+  return new Promise((resolve)=>{
+    const cbName = 'hrbCb_' + Date.now() + '_' + Math.floor(Math.random()*100000);
+    const q = new URLSearchParams({action, employeeId:(ME?ME.EmployeeID:''), token:TOKEN, _t:Date.now()+'_'+Math.random().toString(36).slice(2), callback:cbName, ...params});
+    const script = document.createElement('script');
+    let done = false;
+    function cleanup(){ delete window[cbName]; script.remove(); clearTimeout(timer); }
+    const timer = setTimeout(()=>{ if(done) return; done=true; cleanup(); resolve({success:false, error:'انتهت مهلة الاتصال بالخادم، تحقق من الإنترنت'}); }, 15000);
+    window[cbName] = (data)=>{ if(done) return; done=true; cleanup(); resolve(data); };
+    script.onerror = ()=>{ if(done) return; done=true; cleanup(); resolve({success:false, error:'تعذر الاتصال بالخادم'}); };
+    script.src = API + '?' + q.toString();
+    document.head.appendChild(script);
+  });
+}
+async function apiGet(action, params={}){ return jsonpRequest(action, params); }
+async function apiPost(action, body={}){ return jsonpRequest(action, body); }
+
+/* ---------- Login ---------- */
+document.getElementById('btn-login').onclick = async ()=>{
+  const employeeId = document.getElementById('in-empid').value.trim();
+  const pin = document.getElementById('in-pin').value.trim();
+  const errEl = document.getElementById('login-error');
+  errEl.textContent = '';
+  if(!employeeId || !pin){ errEl.textContent='الرجاء إدخال رقم الموظف والرمز السري'; return; }
+  const btn = document.getElementById('btn-login');
+  btn.textContent = 'جارٍ الدخول...'; btn.disabled = true;
+  try{
+    const j = await jsonpRequest('login', {employeeId, pin});
+    if(!j.success){ errEl.textContent = j.error || 'خطأ في الدخول'; }
+    else{
+      ME = j.data.employee; BRANCHES_SCOPE = j.data.branches; TOKEN = j.data.token;
+      localStorage.setItem('hrb_emp', employeeId); localStorage.setItem('hrb_token', TOKEN);
+      await enterApp();
+    }
+  }catch(e){ errEl.textContent = typeof e==='string'?e:'تعذر الاتصال بالخادم، تحقق من الإنترنت'; }
+  btn.textContent = 'تسجيل الدخول'; btn.disabled = false;
+};
+
+async function tryAutoLogin(){
+  const e = localStorage.getItem('hrb_emp');
+  if(!e || !TOKEN) return;
+  try{
+    const j = await jsonpRequest('resume', {employeeId:e});
+    if(j.success){ ME=j.data.employee; BRANCHES_SCOPE=j.data.branches; await enterApp(); }
+    else{ localStorage.removeItem('hrb_emp'); localStorage.removeItem('hrb_token'); TOKEN=''; }
+  }catch(err){}
+}
+
+async function enterApp(){
+  document.getElementById('login').style.display='none';
+  document.getElementById('app-shell').style.display='flex';
+  document.getElementById('hello-role').textContent = ME.Role==='admin'?'مدير عام':ME.Role==='supervisor'?'مشرف':'موظف';
+  document.getElementById('hello-name').textContent = ME.Name;
+  document.getElementById('p-id').textContent = ME.EmployeeID;
+  document.getElementById('p-name').textContent = ME.Name;
+  document.getElementById('p-role').textContent = ME.Role==='admin'?'مدير عام':ME.Role==='supervisor'?'مشرف':'موظف';
+  document.getElementById('p-whatsapp').value = ME.WhatsApp || '';
+  document.querySelector('[data-view="team"]').style.display = isManager()?'flex':'none';
+  await refreshSnapshot();
+  scheduleShiftAlert();
+  setInterval(pollNotifications, 30000);
+}
+
+/* ---------- Snapshot / data ---------- */
+async function refreshSnapshot(){
+  const j = await apiGet('snapshot');
+  if(!j.success){ toast(j.error||'تعذر تحميل البيانات'); return; }
+  SNAP = j.data; BRANCHES = SNAP.branches;
+  renderBranchPicker(); renderTodayStatus(); renderNotifBadge();
+  renderRequests(); renderTeam(); renderMySummary();
+}
+
+function monthKey(d){ return String(d).slice(0,7); }
+function renderMySummary(){
+  if(!SNAP || !ME) return;
+  const thisMonth = new Date().toISOString().slice(0,7);
+  const days = new Set((SNAP.attendance||[]).filter(a=>String(a.EmployeeID)===String(ME.EmployeeID) && monthKey(a.Date)===thisMonth).map(a=>a.Date)).size;
+  const advances = (SNAP.money||[]).filter(m=>String(m.EmployeeID)===String(ME.EmployeeID) && m.Status==='approved' && monthKey(m.Date)===thisMonth).reduce((s,m)=>s+Number(m.Amount||0),0);
+  const permissions = (SNAP.leaves||[]).filter(l=>String(l.EmployeeID)===String(ME.EmployeeID) && monthKey(l.DateFrom)===thisMonth).length;
+  document.getElementById('my-summary').innerHTML = `
+    <div class="req-item"><span class="l">أيام الحضور</span><b>${days}</b></div>
+    <div class="req-item"><span class="l">السلف المعتمدة</span><b>${advances}</b></div>
+    <div class="req-item"><span class="l">طلبات إجازة/استئذان</span><b>${permissions}</b></div>`;
+}
+function renderTeamSummary(){
+  if(!SNAP || !isManager()) return;
+  const thisMonth = new Date().toISOString().slice(0,7);
+  const advances = (SNAP.money||[]).filter(m=>m.Status==='approved' && monthKey(m.Date)===thisMonth).reduce((s,m)=>s+Number(m.Amount||0),0);
+  const leavesCount = (SNAP.leaves||[]).filter(l=>monthKey(l.DateFrom)===thisMonth).length;
+  const daysSet = new Set((SNAP.attendance||[]).filter(a=>monthKey(a.Date)===thisMonth).map(a=>a.EmployeeID+'|'+a.Date)).size;
+  document.getElementById('team-summary').innerHTML = `
+    <div class="card-plain">
+      <div class="req-item"><span class="l">إجمالي أيام الحضور (الفريق)</span><b>${daysSet}</b></div>
+      <div class="req-item"><span class="l">إجمالي السلف المعتمدة</span><b>${advances}</b></div>
+      <div class="req-item"><span class="l">طلبات إجازة/استئذان هذا الشهر</span><b>${leavesCount}</b></div>
+    </div>`;
+}
+
+function renderBranchPicker(){
+  const wrap = document.getElementById('branch-picker');
+  wrap.innerHTML = '';
+  if(!BRANCHES.length){ wrap.innerHTML = '<span style="font-size:12px;color:var(--ink-600)">لا يوجد فرع مسجّل بعد</span>'; return; }
+  if(!CURRENT_BRANCH) CURRENT_BRANCH = BRANCHES[0].BranchID;
+  BRANCHES.forEach(b=>{
+    const c = document.createElement('button');
+    c.className = 'branch-chip'+(b.BranchID===CURRENT_BRANCH?' active':'');
+    c.textContent = b.Name;
+    c.onclick = ()=>{ CURRENT_BRANCH = b.BranchID; renderBranchPicker(); };
+    wrap.appendChild(c);
+  });
+}
+
+function renderTodayStatus(){
+  const today = new Date().toISOString().slice(0,10);
+  const mine = (SNAP.attendance||[]).filter(a=>String(a.EmployeeID)===String(ME.EmployeeID) && a.Date===today);
+  const open = mine.find(a=>!a.CheckOut);
+  const pill = document.getElementById('status-pill'), st = document.getElementById('today-status');
+  if(open){ pill.textContent='داخل الدوام'; pill.className='status-pill pill-in'; st.textContent='حضور: '+String(open.CheckIn).slice(11,16); CURRENT_BRANCH=open.BranchID; startGeofenceWatch(); }
+  else if(mine.length){ pill.textContent='انتهى الدوام'; pill.className='status-pill pill-out'; st.textContent='آخر انصراف: '+String(mine[mine.length-1].CheckOut).slice(11,16); stopGeofenceWatch(); }
+  else{ pill.textContent='خارج الدوام'; pill.className='status-pill pill-out'; st.textContent='لم يسجّل بعد'; }
+}
+
+/* ---------- Check in/out ---------- */
+function getLoc(){
+  return new Promise((resolve,reject)=>{
+    if(!navigator.geolocation) return reject('المتصفح لا يدعم تحديد الموقع');
+    navigator.geolocation.getCurrentPosition(
+      pos=>resolve(pos.coords),
+      err=>reject('الرجاء تفعيل صلاحية الموقع للمتصفح'),
+      {enableHighAccuracy:true, timeout:12000}
+    );
+  });
+}
+document.getElementById('card-checkin').onclick = ()=>doCheck('checkIn');
+document.getElementById('card-checkout').onclick = ()=>doCheck('checkOut');
+async function doCheck(action){
+  if(!CURRENT_BRANCH){ toast('اختر الفرع أولاً'); return; }
+  toast('جارٍ تحديد موقعك...');
+  try{
+    const coords = await getLoc();
+    const j = await apiPost(action, {employeeId:ME.EmployeeID, branchId:CURRENT_BRANCH, lat:coords.latitude, lng:coords.longitude});
+    if(j.success){
+      successChime();
+      toast(action==='checkIn'?'تم تسجيل الحضور بنجاح ✅':'تم تسجيل الانصراف بنجاح ✅');
+      if(action==='checkIn') startGeofenceWatch(); else stopGeofenceWatch();
+      await refreshSnapshot();
+    }
+    else{ errorChime(); toast(j.error||'حدث خطأ'); }
+  }catch(e){ errorChime(); toast(typeof e==='string'?e:'تعذر تحديد الموقع'); }
+}
+
+/* ---------- Geofence exit watcher (while checked in) ---------- */
+let GEO_WATCH_ID = null, OUTSIDE_STREAK = 0, EXIT_ALERTED = false;
+function startGeofenceWatch(){
+  if(!navigator.geolocation || GEO_WATCH_ID!==null) return;
+  OUTSIDE_STREAK = 0; EXIT_ALERTED = false;
+  GEO_WATCH_ID = navigator.geolocation.watchPosition(pos=>{
+    const b = BRANCHES.find(x=>x.BranchID===CURRENT_BRANCH);
+    if(!b || !b.Lat) return;
+    const dist = distanceMetersJS(pos.coords.latitude, pos.coords.longitude, Number(b.Lat), Number(b.Lng));
+    if(dist > Number(b.RadiusMeters||100) + 60){
+      OUTSIDE_STREAK++;
+      if(OUTSIDE_STREAK>=2 && !EXIT_ALERTED){
+        EXIT_ALERTED = true; errorChime();
+        toast('⚠ أنت خارج نطاق الفرع أثناء الدوام');
+        apiPost('exitAlert', {}).catch(()=>{});
+      }
+    } else { OUTSIDE_STREAK = 0; EXIT_ALERTED = false; }
+  }, ()=>{}, {enableHighAccuracy:true, maximumAge:20000});
+}
+function stopGeofenceWatch(){
+  if(GEO_WATCH_ID!==null && navigator.geolocation){ navigator.geolocation.clearWatch(GEO_WATCH_ID); GEO_WATCH_ID=null; }
+}
+function distanceMetersJS(lat1,lng1,lat2,lng2){
+  const R=6371000, toRad=d=>d*Math.PI/180;
+  const dLat=toRad(lat2-lat1), dLng=toRad(lng2-lng1);
+  const a=Math.sin(dLat/2)**2 + Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLng/2)**2;
+  return R*2*Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+/* ---------- Requests: leave / permission / money ---------- */
+document.getElementById('card-leave').onclick = ()=>openRequestSheet('leave');
+document.getElementById('card-permission').onclick = ()=>openRequestSheet('permission');
+document.getElementById('card-money').onclick = ()=>openMoneySheet();
+
+function openSheet(html){
+  document.getElementById('sheet').innerHTML = '<button class="sheet-close" id="sheet-x">✕</button>'+html;
+  document.getElementById('sheet').style.display='block';
+  document.getElementById('sheet-overlay').style.display='block';
+  document.getElementById('sheet-x').onclick = closeSheet;
+  document.getElementById('sheet-overlay').onclick = closeSheet;
+}
+function closeSheet(){ document.getElementById('sheet').style.display='none'; document.getElementById('sheet-overlay').style.display='none'; }
+
+function openRequestSheet(type){
+  const title = type==='leave' ? 'طلب إجازة' : 'طلب استئذان';
+  openSheet(`
+    <h3>${title}</h3>
+    <div class="field" style="margin-bottom:10px;"><label>من تاريخ</label><input type="date" id="rq-from"></div>
+    <div class="field" style="margin-bottom:10px;"><label>إلى تاريخ</label><input type="date" id="rq-to"></div>
+    <div class="field" style="margin-bottom:16px;"><label>السبب</label><input id="rq-reason" placeholder="اختياري"></div>
+    <button class="btn-primary" style="width:100%;" id="rq-submit">إرسال الطلب</button>
+  `);
+  document.getElementById('rq-submit').onclick = async ()=>{
+    const dateFrom = document.getElementById('rq-from').value, dateTo = document.getElementById('rq-to').value;
+    if(!dateFrom){ toast('حدد تاريخ البداية'); return; }
+    const j = await apiPost('addLeaveRequest', {employeeId:ME.EmployeeID, type, dateFrom, dateTo:dateTo||dateFrom, reason:document.getElementById('rq-reason').value});
+    if(j.success){ successChime(); toast('تم إرسال الطلب ✅'); closeSheet(); await refreshSnapshot(); } else { errorChime(); toast(j.error||'خطأ'); }
+  };
+}
+function openMoneySheet(){
+  openSheet(`
+    <h3>طلب سلفة</h3>
+    <div class="field" style="margin-bottom:10px;"><label>المبلغ</label><input type="number" id="mn-amount" placeholder="0"></div>
+    <div class="field" style="margin-bottom:16px;"><label>السبب</label><input id="mn-reason" placeholder="اختياري"></div>
+    <button class="btn-primary" style="width:100%;" id="mn-submit">إرسال الطلب</button>
+  `);
+  document.getElementById('mn-submit').onclick = async ()=>{
+    const amount = document.getElementById('mn-amount').value;
+    if(!amount || Number(amount)<=0){ toast('أدخل مبلغاً صحيحاً'); return; }
+    const j = await apiPost('addMoneyRequest', {employeeId:ME.EmployeeID, type:'advance', amount, reason:document.getElementById('mn-reason').value});
+    if(j.success){ successChime(); toast('تم إرسال طلب السلفة ✅'); closeSheet(); await refreshSnapshot(); } else { errorChime(); toast(j.error||'خطأ'); }
+  };
+}
+
+/* ---------- Requests view (mine) ---------- */
+let RTAB = 'leave';
+document.querySelectorAll('[data-rtab]').forEach(b=>b.onclick=()=>{
+  RTAB=b.dataset.rtab;
+  document.querySelectorAll('[data-rtab]').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); renderRequests();
+});
+function stBadge(s){ return `<span class="st st-${s}">${s==='pending'?'قيد الانتظار':s==='approved'?'مقبول':'مرفوض'}</span>`; }
+function renderRequests(){
+  if(!SNAP) return;
+  const wrap = document.getElementById('requests-list');
+  const mine = a => String(a.EmployeeID)===String(ME.EmployeeID);
+  if(RTAB==='leave'){
+    const items = (SNAP.leaves||[]).filter(mine).sort((a,b)=>b.ID.localeCompare(a.ID));
+    wrap.innerHTML = items.length ? items.map(l=>`
+      <div class="req-item"><div><div class="l">${l.Type==='leave'?'إجازة':'استئذان'}</div><div class="d">${l.DateFrom} → ${l.DateTo}</div></div>${stBadge(l.Status)}</div>
+    `).join('') : '<div class="empty">لا توجد طلبات بعد</div>';
+  } else {
+    const items = (SNAP.money||[]).filter(m=>SNAP.money && (isManager() ? true : mine(m))).filter(mine).sort((a,b)=>b.ID.localeCompare(a.ID));
+    wrap.innerHTML = items.length ? items.map(m=>`
+      <div class="req-item"><div><div class="l">سلفة ${m.Amount}</div><div class="d">${m.Date}</div></div>${stBadge(m.Status)}</div>
+    `).join('') : '<div class="empty">لا توجد طلبات بعد</div>';
+  }
+}
+
+/* ---------- Team (manager) ---------- */
+document.getElementById('card-team-shortcut').onclick = ()=>switchView('team');
+function renderTeam(){
+  if(!SNAP || !isManager()) return;
+  renderTeamSummary();
+  const pendLeaves = (SNAP.leaves||[]).filter(l=>l.Status==='pending');
+  const pendMoney = (SNAP.money||[]).filter(m=>m.Status==='pending');
+  const empName = id => (SNAP.employees.find(e=>String(e.EmployeeID)===String(id))||{}).Name || id;
+  const pendWrap = document.getElementById('team-pending');
+  let html = '';
+  pendLeaves.forEach(l=> html += `
+    <div class="card-plain"><div class="req-item"><div><div class="l">${empName(l.EmployeeID)} — ${l.Type==='leave'?'إجازة':'استئذان'}</div><div class="d">${l.DateFrom} → ${l.DateTo}</div></div></div>
+    <div style="display:flex; gap:8px; margin-top:8px;">
+      <button class="btn-primary" style="flex:1; padding:9px;" onclick="decide('leave','${l.ID}','approved')">قبول</button>
+      <button class="btn-ghost" style="flex:1; padding:9px;" onclick="decide('leave','${l.ID}','rejected')">رفض</button>
+    </div></div>`);
+  pendMoney.forEach(m=> html += `
+    <div class="card-plain"><div class="req-item"><div><div class="l">${empName(m.EmployeeID)} — سلفة ${m.Amount}</div><div class="d">${m.Date}</div></div></div>
+    <div style="display:flex; gap:8px; margin-top:8px;">
+      <button class="btn-primary" style="flex:1; padding:9px;" onclick="decide('money','${m.ID}','approved')">قبول</button>
+      <button class="btn-ghost" style="flex:1; padding:9px;" onclick="decide('money','${m.ID}','rejected')">رفض</button>
+    </div></div>`);
+  pendWrap.innerHTML = html || '<div class="empty">لا توجد طلبات معلّقة</div>';
+
+  const today = new Date().toISOString().slice(0,10);
+  const onshift = (SNAP.attendance||[]).filter(a=>a.Date===today && !a.CheckOut);
+  document.getElementById('team-onshift').innerHTML = onshift.length ? onshift.map(a=>`
+    <div class="req-item"><div><div class="l">${empName(a.EmployeeID)}</div><div class="d">منذ ${String(a.CheckIn).slice(11,16)}</div></div><span class="status-pill pill-in">داخل الدوام</span></div>
+  `).join('') : '<div class="empty">لا يوجد أحد في الدوام حالياً</div>';
+
+  document.getElementById('team-branches').innerHTML = (SNAP.branches||[]).map(b=>`
+    <div class="req-item"><div><div class="l">${b.Name}</div><div class="d">${b.Lat?('نطاق '+b.RadiusMeters+' م — الموقع محدد'):'لم يُحدد الموقع بعد'}</div></div>
+    <button class="btn-ghost" style="padding:8px 12px; font-size:12px;" onclick="saveBranchHere('${b.BranchID}', ${b.RadiusMeters||100})">📍 تحديث الموقع</button></div>
+  `).join('') || '<div class="empty">لا توجد فروع بعد</div>';
+
+  document.getElementById('team-list').innerHTML = (SNAP.employees||[]).map(e=>`
+    <div class="req-item" style="cursor:pointer;" onclick="openEditEmployee('${e.EmployeeID}')"><div><div class="l">${e.Name}</div><div class="d">${e.Role==='admin'?'مدير عام':e.Role==='supervisor'?'مشرف':'موظف'} · #${e.EmployeeID}${e.Active===false?' · معطّل':''}</div></div><span style="color:var(--ink-600);">›</span></div>
+  `).join('') || '<div class="empty">لا يوجد موظفون</div>';
+}
+window.decide = async (kind, id, decision)=>{
+  const j = await apiPost(kind==='leave'?'decideLeave':'decideMoney', kind==='leave'?{leaveId:id, decision}:{moneyId:id, decision});
+  if(j.success){ successChime(); toast('تم تحديث الطلب'); await refreshSnapshot(); } else { errorChime(); toast(j.error||'خطأ'); }
+};
+
+/* ---------- Branch management ---------- */
+window.saveBranchHere = async (branchId, currentRadius)=>{
+  toast('جارٍ تحديد موقعك الحالي...');
+  try{
+    const coords = await getLoc();
+    const j = await apiPost('saveBranchLocation', {branchId, lat:coords.latitude, lng:coords.longitude, radius:currentRadius});
+    if(j.success){ successChime(); toast('تم حفظ موقع الفرع ✅'); await refreshSnapshot(); } else { errorChime(); toast(j.error||'خطأ'); }
+  }catch(e){ errorChime(); toast('تعذر تحديد موقعك الحالي'); }
+};
+document.getElementById('btn-add-branch').onclick = ()=>{
+  openSheet(`
+    <h3>إضافة فرع جديد</h3>
+    <div class="field" style="margin-bottom:10px;"><label>اسم الفرع</label><input id="br-name" placeholder="مثال: فرع النخيل"></div>
+    <div class="field" style="margin-bottom:16px;"><label>نطاق السماح (متر)</label><input type="number" id="br-radius" value="100"></div>
+    <button class="btn-primary" style="width:100%;" id="br-submit">📍 إضافة الفرع بموقعي الحالي</button>
+  `);
+  document.getElementById('br-submit').onclick = async ()=>{
+    const name = document.getElementById('br-name').value.trim();
+    if(!name){ toast('اكتب اسم الفرع'); return; }
+    toast('جارٍ تحديد موقعك...');
+    try{
+      const coords = await getLoc();
+      const j = await apiPost('addBranch', {name, lat:coords.latitude, lng:coords.longitude, radius:document.getElementById('br-radius').value||100});
+      if(j.success){ successChime(); toast('تمت إضافة الفرع ✅'); closeSheet(); await refreshSnapshot(); } else { errorChime(); toast(j.error||'خطأ'); }
+    }catch(e){ errorChime(); toast('تعذر تحديد موقعك الحالي'); }
+  };
+};
+
+/* ---------- Employee management ---------- */
+function branchCheckboxes(selected){
+  selected = (selected||'').split(',').map(s=>s.trim());
+  return (SNAP.branches||[]).map(b=>`
+    <label style="display:flex; align-items:center; gap:8px; padding:8px 0; font-size:14px;">
+      <input type="checkbox" class="emp-branch-cb" value="${b.BranchID}" ${selected.includes(b.BranchID)?'checked':''}> ${b.Name}
+    </label>`).join('');
+}
+document.getElementById('btn-add-employee').onclick = ()=>{
+  openSheet(`
+    <h3>إضافة موظف جديد</h3>
+    <div class="field" style="margin-bottom:10px;"><label>الاسم</label><input id="ne-name"></div>
+    <div class="field" style="margin-bottom:10px;"><label>رقم واتساب</label><input id="ne-whatsapp" placeholder="9665xxxxxxxx"></div>
+    <div class="field" style="margin-bottom:10px;"><label>رمز سري (PIN)</label><input id="ne-pin" inputmode="numeric"></div>
+    <div class="field" style="margin-bottom:10px;"><label>الصلاحية</label>
+      <select id="ne-role" style="padding:14px; border-radius:14px; border:1.5px solid var(--cream-200); background:var(--cream-100); color:var(--ink-900);">
+        <option value="employee">موظف</option><option value="supervisor">مشرف</option><option value="admin">مدير عام</option>
+      </select>
+    </div>
+    <div class="field" style="margin-bottom:10px;"><label>وقت بدء الدوام</label><input type="time" id="ne-start"></div>
+    <div class="field" style="margin-bottom:10px;"><label>وقت نهاية الدوام</label><input type="time" id="ne-end"></div>
+    <div id="ne-branches-wrap"><label style="font-size:13px; font-weight:700; color:var(--ink-600);">الفروع (للموظف فقط)</label>${branchCheckboxes('')}</div>
+    <button class="btn-primary" style="width:100%; margin-top:10px;" id="ne-submit">إضافة الموظف</button>
+  `);
+  document.getElementById('ne-submit').onclick = async ()=>{
+    const name = document.getElementById('ne-name').value.trim(), pin = document.getElementById('ne-pin').value.trim();
+    if(!name || !pin){ toast('اكتب الاسم والرمز السري'); return; }
+    const branchIds = [...document.querySelectorAll('.emp-branch-cb:checked')].map(c=>c.value).join(',');
+    const j = await apiPost('addEmployee', {
+      name, pin, whatsapp:document.getElementById('ne-whatsapp').value.trim(),
+      role:document.getElementById('ne-role').value, branchIds,
+      shiftStart:document.getElementById('ne-start').value, shiftEnd:document.getElementById('ne-end').value
+    });
+    if(j.success){ successChime(); toast('تمت إضافة الموظف ✅'); closeSheet(); await refreshSnapshot(); } else { errorChime(); toast(j.error||'خطأ'); }
+  };
+};
+window.openEditEmployee = (employeeId)=>{
+  const e = SNAP.employees.find(x=>String(x.EmployeeID)===String(employeeId));
+  if(!e) return;
+  openSheet(`
+    <h3>${e.Name} <span style="font-size:12px; color:var(--ink-600);">#${e.EmployeeID}</span></h3>
+    <div class="field" style="margin-bottom:10px;"><label>الصلاحية</label>
+      <select id="ee-role" style="padding:14px; border-radius:14px; border:1.5px solid var(--cream-200); background:var(--cream-100); color:var(--ink-900);">
+        <option value="employee" ${e.Role==='employee'?'selected':''}>موظف</option>
+        <option value="supervisor" ${e.Role==='supervisor'?'selected':''}>مشرف</option>
+        <option value="admin" ${e.Role==='admin'?'selected':''}>مدير عام</option>
+      </select>
+    </div>
+    <div id="ee-branches-wrap"><label style="font-size:13px; font-weight:700; color:var(--ink-600);">نقل/تعيين الفروع (للموظف فقط)</label>${branchCheckboxes(e.BranchIDs)}</div>
+    <label style="display:flex; align-items:center; gap:8px; padding:10px 0; font-size:14px;">
+      <input type="checkbox" id="ee-active" ${e.Active!==false?'checked':''}> الحساب مفعّل
+    </label>
+    <button class="btn-primary" style="width:100%; margin-top:6px;" id="ee-submit">حفظ التعديلات</button>
+  `);
+  document.getElementById('ee-submit').onclick = async ()=>{
+    const branchIds = [...document.querySelectorAll('.emp-branch-cb:checked')].map(c=>c.value).join(',');
+    const j = await apiPost('updateEmployee', {
+      employeeId, role:document.getElementById('ee-role').value, branchIds,
+      Active:document.getElementById('ee-active').checked
+    });
+    if(j.success){ successChime(); toast('تم حفظ التعديلات ✅'); closeSheet(); await refreshSnapshot(); } else { errorChime(); toast(j.error||'خطأ'); }
+  };
+};
+
+/* ---------- Notifications ---------- */
+function renderNotifBadge(){
+  const unread = (SNAP.notifications||[]).filter(n=>!n.Read).length;
+  document.getElementById('bell-dot').style.display = unread ? 'block' : 'none';
+}
+async function pollNotifications(){
+  if(!ME) return;
+  const j = await apiGet('poll', {since: localStorage.getItem('hrb_lastpoll')||'1970-01-01 00:00:00'});
+  if(j.success && j.data.notifications && j.data.notifications.length){
+    pingNotify();
+    j.data.notifications.forEach(n=> toast(n.Message));
+    document.getElementById('bell-dot').style.display='block';
+  }
+  if(j.success) localStorage.setItem('hrb_lastpoll', j.data.serverTime);
+}
+document.getElementById('btn-bell').onclick = ()=>{
+  const items = (SNAP.notifications||[]).sort((a,b)=>b.ID.localeCompare(a.ID)).slice(0,20);
+  openSheet('<h3>الإشعارات</h3>' + (items.length ? items.map(n=>`
+    <div class="req-item"><div><div class="l">${n.Message}</div><div class="d">${n.Timestamp}</div></div></div>
+  `).join('') : '<div class="empty">لا توجد إشعارات</div>'));
+  items.forEach(n=>apiPost('markNotificationRead', {notifId:n.ID}));
+  document.getElementById('bell-dot').style.display='none';
+};
+
+/* ---------- Sound design: distinct chimes per action ---------- */
+function playTone(freqs, dur=0.16, gap=0.05, type='sine', vol=.22){
+  try{
+    const ctx = new (window.AudioContext||window.webkitAudioContext)();
+    let t = ctx.currentTime;
+    freqs.forEach(f=>{
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type=type; o.frequency.value=f; o.connect(g); g.connect(ctx.destination);
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t+0.01);
+      g.gain.exponentialRampToValueAtTime(0.001, t+dur);
+      o.start(t); o.stop(t+dur+0.02);
+      t += dur+gap;
+    });
+  }catch(e){}
+}
+function successChime(){ playTone([740,988], .13, .03, 'sine', .2); }      // نغمة صاعدة لطيفة: نجاح عملية
+function errorChime(){ playTone([220,175], .18, .02, 'sawtooth', .12); }   // نغمة هابطة خافتة: خطأ/رفض
+function pingNotify(){ playTone([1046], .14, 0, 'triangle', .16); }        // نقرة واحدة: إشعار وارد
+function shiftChime(){ playTone([659,830,988], .18, .05, 'sine', .25); }   // ثلاث نغمات: تنبيه الدوام
+function scheduleShiftAlert(){
+  setInterval(()=>{
+    if(!ME || !ME.ShiftStart) return;
+    const [h,m] = ME.ShiftStart.split(':').map(Number);
+    const now = new Date();
+    const shift = new Date(); shift.setHours(h, m, 0, 0);
+    const diffMin = Math.round((shift-now)/60000);
+    const key = 'hrb_alerted_'+now.toISOString().slice(0,10);
+    if(diffMin===30 && !localStorage.getItem(key)){
+      localStorage.setItem(key,'1'); shiftChime(); toast('⏰ دوامك يبدأ خلال 30 دقيقة');
+      if(Notification && Notification.permission==='granted') new Notification('HR بهار', {body:'دوامك يبدأ خلال 30 دقيقة'});
+    }
+  }, 60000);
+  if(window.Notification && Notification.permission==='default') Notification.requestPermission();
+}
+
+/* ---------- Nav ---------- */
+function switchView(name){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  document.querySelectorAll('.bottomnav button').forEach(b=>b.classList.toggle('active', b.dataset.view===name));
+}
+document.querySelectorAll('.bottomnav button').forEach(b=>b.onclick=()=>switchView(b.dataset.view));
+
+document.getElementById('btn-logout').onclick = ()=>{
+  stopGeofenceWatch();
+  localStorage.removeItem('hrb_emp'); localStorage.removeItem('hrb_token');
+  location.reload();
+};
+document.getElementById('btn-add-home').onclick = ()=>{
+  toast('من قائمة المتصفح اختر "إضافة إلى الشاشة الرئيسية"');
+};
+
+/* ---------- WhatsApp number (self-service, for future WhatsApp notifications) ---------- */
+document.getElementById('btn-save-whatsapp').onclick = async ()=>{
+  const whatsapp = document.getElementById('p-whatsapp').value.trim();
+  const j = await apiPost('updateMyProfile', {WhatsApp: whatsapp});
+  if(j.success){ successChime(); toast('تم حفظ رقم الواتساب ✅'); ME.WhatsApp = whatsapp; } else { errorChime(); toast(j.error||'خطأ'); }
+};
+
+/* ---------- PDF reports (via browser print) ---------- */
+function monthLabel(){ return new Date().toLocaleDateString('ar-SA', {year:'numeric', month:'long'}); }
+function printAndShow(html){
+  document.getElementById('print-report').innerHTML = html;
+  setTimeout(()=>window.print(), 150);
+}
+document.getElementById('btn-report-mine').onclick = ()=>{
+  if(!SNAP) return;
+  const mine = id => String(id)===String(ME.EmployeeID);
+  const thisMonth = new Date().toISOString().slice(0,7);
+  const att = (SNAP.attendance||[]).filter(a=>mine(a.EmployeeID) && monthKey(a.Date)===thisMonth).sort((a,b)=>a.Date.localeCompare(b.Date));
+  const money = (SNAP.money||[]).filter(m=>mine(m.EmployeeID) && monthKey(m.Date)===thisMonth);
+  const leaves = (SNAP.leaves||[]).filter(l=>mine(l.EmployeeID) && monthKey(l.DateFrom)===thisMonth);
+  printAndShow(`
+    <h2>تقرير ${ME.Name} — ${monthLabel()}</h2>
+    <div class="sub">نظام حضور بهار ودلة</div>
+    <h3>الحضور والانصراف</h3>
+    <table><tr><th>التاريخ</th><th>الحضور</th><th>الانصراف</th></tr>
+      ${att.map(a=>`<tr><td>${a.Date}</td><td>${String(a.CheckIn).slice(11,16)||'-'}</td><td>${String(a.CheckOut).slice(11,16)||'-'}</td></tr>`).join('') || '<tr><td colspan="3">لا يوجد سجلات</td></tr>'}
+    </table>
+    <h3>السلف</h3>
+    <table><tr><th>التاريخ</th><th>المبلغ</th><th>الحالة</th></tr>
+      ${money.map(m=>`<tr><td>${m.Date}</td><td>${m.Amount}</td><td>${m.Status==='approved'?'مقبول':m.Status==='rejected'?'مرفوض':'قيد الانتظار'}</td></tr>`).join('') || '<tr><td colspan="3">لا يوجد طلبات</td></tr>'}
+    </table>
+    <h3>الإجازات والاستئذان</h3>
+    <table><tr><th>النوع</th><th>من</th><th>إلى</th><th>الحالة</th></tr>
+      ${leaves.map(l=>`<tr><td>${l.Type==='leave'?'إجازة':'استئذان'}</td><td>${l.DateFrom}</td><td>${l.DateTo}</td><td>${l.Status==='approved'?'مقبول':l.Status==='rejected'?'مرفوض':'قيد الانتظار'}</td></tr>`).join('') || '<tr><td colspan="4">لا يوجد طلبات</td></tr>'}
+    </table>
+  `);
+};
+document.getElementById('btn-report-team').onclick = ()=>{
+  if(!SNAP || !isManager()) return;
+  const thisMonth = new Date().toISOString().slice(0,7);
+  const empName = id => (SNAP.employees.find(e=>String(e.EmployeeID)===String(id))||{}).Name || id;
+  const byEmp = {};
+  (SNAP.attendance||[]).filter(a=>monthKey(a.Date)===thisMonth).forEach(a=>{ byEmp[a.EmployeeID] = byEmp[a.EmployeeID]||new Set(); byEmp[a.EmployeeID].add(a.Date); });
+  const money = (SNAP.money||[]).filter(m=>monthKey(m.Date)===thisMonth);
+  const leaves = (SNAP.leaves||[]).filter(l=>monthKey(l.DateFrom)===thisMonth);
+  printAndShow(`
+    <h2>تقرير الفريق — ${monthLabel()}</h2>
+    <div class="sub">نظام حضور بهار ودلة</div>
+    <h3>أيام الحضور لكل موظف</h3>
+    <table><tr><th>الموظف</th><th>عدد أيام الحضور</th></tr>
+      ${Object.keys(byEmp).map(id=>`<tr><td>${empName(id)}</td><td>${byEmp[id].size}</td></tr>`).join('') || '<tr><td colspan="2">لا يوجد سجلات</td></tr>'}
+    </table>
+    <h3>طلبات السلف هذا الشهر</h3>
+    <table><tr><th>الموظف</th><th>المبلغ</th><th>الحالة</th></tr>
+      ${money.map(m=>`<tr><td>${empName(m.EmployeeID)}</td><td>${m.Amount}</td><td>${m.Status==='approved'?'مقبول':m.Status==='rejected'?'مرفوض':'قيد الانتظار'}</td></tr>`).join('') || '<tr><td colspan="3">لا يوجد طلبات</td></tr>'}
+    </table>
+    <h3>الإجازات والاستئذان هذا الشهر</h3>
+    <table><tr><th>الموظف</th><th>النوع</th><th>من</th><th>إلى</th><th>الحالة</th></tr>
+      ${leaves.map(l=>`<tr><td>${empName(l.EmployeeID)}</td><td>${l.Type==='leave'?'إجازة':'استئذان'}</td><td>${l.DateFrom}</td><td>${l.DateTo}</td><td>${l.Status==='approved'?'مقبول':l.Status==='rejected'?'مرفوض':'قيد الانتظار'}</td></tr>`).join('') || '<tr><td colspan="5">لا يوجد طلبات</td></tr>'}
+    </table>
+  `);
+};
+
+document.getElementById('btn-refresh').onclick = async ()=>{
+  if(!ME) return;
+  toast('جارٍ التحديث...');
+  await refreshSnapshot();
+  toast('تم التحديث ✅');
+};
+
+// إصلاح مشكلة عدم ظهور البيانات المحدثة على آيفون: تحديث تلقائي كلما رجع المستخدم للتطبيق
+document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='visible' && ME) refreshSnapshot(); });
+window.addEventListener('pageshow', ()=>{ if(ME) refreshSnapshot(); });
+window.addEventListener('focus', ()=>{ if(ME) refreshSnapshot(); });
+
+tryAutoLogin();
+</script>
+</body>
+</html>
