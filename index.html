@@ -304,7 +304,7 @@
 <div id="sheet" style="display:none;"></div>
 
 <script>
-const API = 'https://script.google.com/macros/s/AKfycbxWQHP4oEX7E1-KrbhOuExc0PQFu3P_H4z7xUXa1Wxfu0g5KDxv6ncVuO-1DdX9wLuZ/exec';
+const API = 'https://hr-bahar-api.baharwdalah.workers.dev';
 let ME = null, BRANCHES = [], CURRENT_BRANCH = null, SNAP = null, TOKEN = localStorage.getItem('hrb_token') || '';
 
 function toast(msg){
@@ -314,19 +314,14 @@ function toast(msg){
 }
 function isManager(){ return ME && (ME.Role==='admin' || ME.Role==='supervisor'); }
 
-function jsonpRequest(action, params={}){
-  return new Promise((resolve)=>{
-    const cbName = 'hrbCb_' + Date.now() + '_' + Math.floor(Math.random()*100000);
-    const q = new URLSearchParams({action, employeeId:(ME?ME.EmployeeID:''), token:TOKEN, _t:Date.now()+'_'+Math.random().toString(36).slice(2), callback:cbName, ...params});
-    const script = document.createElement('script');
-    let done = false;
-    function cleanup(){ delete window[cbName]; script.remove(); clearTimeout(timer); }
-    const timer = setTimeout(()=>{ if(done) return; done=true; cleanup(); resolve({success:false, error:'انتهت مهلة الاتصال بالخادم، تحقق من الإنترنت'}); }, 15000);
-    window[cbName] = (data)=>{ if(done) return; done=true; cleanup(); resolve(data); };
-    script.onerror = ()=>{ if(done) return; done=true; cleanup(); resolve({success:false, error:'تعذر الاتصال بالخادم'}); };
-    script.src = API + '?' + q.toString();
-    document.head.appendChild(script);
-  });
+async function jsonpRequest(action, params={}){
+  const q = new URLSearchParams({action, employeeId:(ME?ME.EmployeeID:''), token:TOKEN, _t:Date.now()+'_'+Math.random().toString(36).slice(2), ...params});
+  try{
+    const res = await fetch(API + '?' + q.toString(), {cache:'no-store'});
+    return await res.json();
+  }catch(e){
+    return {success:false, error:'تعذر الاتصال بالخادم، تحقق من الإنترنت'};
+  }
 }
 async function apiGet(action, params={}){ return jsonpRequest(action, params); }
 async function apiPost(action, body={}){ return jsonpRequest(action, body); }
