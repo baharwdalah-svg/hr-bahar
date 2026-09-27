@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>HR بهار</title>
+<title>HR بهار ودله</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#140B06">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232B1810'/%3E%3Ctext x='50' y='66' font-size='54' text-anchor='middle'%3E%E2%98%95%3C/text%3E%3C/svg%3E">
-<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22HR%20%D8%A8%D9%87%D8%A7%D8%B1%22%2C%22short_name%22%3A%22HR%20%D8%A8%D9%87%D8%A7%D8%B1%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%231C120B%22%2C%22theme_color%22%3A%22%23140B06%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%2527http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%2527%2520viewBox%253D%25270%25200%2520100%2520100%2527%253E%253Crect%2520width%253D%2527100%2527%2520height%253D%2527100%2527%2520rx%253D%252722%2527%2520fill%253D%2527%25232B1810%2527%252F%253E%253Ctext%2520x%253D%252750%2527%2520y%253D%252766%2527%2520font-size%253D%252754%2527%2520text-anchor%253D%2527middle%2527%253E%25E2%2598%2595%253C%252Ftext%253E%253C%252Fsvg%253E%22%2C%22sizes%22%3A%22any%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22HR%20%D8%A8%D9%87%D8%A7%D8%B1%20%D9%88%D8%AF%D9%84%D9%87%22%2C%22short_name%22%3A%22HR%20%D8%A8%D9%87%D8%A7%D8%B1%20%D9%88%D8%AF%D9%84%D9%87%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%231C120B%22%2C%22theme_color%22%3A%22%23140B06%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%253E%253Crect%20width%3D%27100%27%20height%3D%27100%27%20rx%3D%2722%27%20fill%3D%27%25232B1810%27%2F%253E%253Ctext%20x%3D%2750%27%20y%3D%2766%27%20font-size%3D%2754%27%20text-anchor%3D%27middle%27%253E%25E2%2598%2595%253C%2Ftext%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22any%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
@@ -101,6 +101,12 @@
   .task-card.add-emp{background:linear-gradient(145deg,#3E5C4A,#5B8368);}
   .task-card.add-branch{background:linear-gradient(145deg,#B8860B,#C89B3C);}
   .task-card.announce{background:linear-gradient(145deg,#7A2E2E,#9C4141);}
+  .task-card.schedule{background:linear-gradient(145deg,#4A5568,#6B7A94);}
+  .bar-row{display:flex; align-items:center; gap:10px; padding:8px 0;}
+  .bar-row .bl{font-size:12px; font-weight:700; width:78px; flex:0 0 auto;}
+  .bar-track{flex:1; height:10px; border-radius:6px; background:var(--cream-200); overflow:hidden;}
+  .bar-fill{height:100%; border-radius:6px; background:linear-gradient(90deg,var(--clay-600),var(--gold-500));}
+  .bar-val{font-size:11px; color:var(--ink-600); width:38px; text-align:left; flex:0 0 auto;}
   .task-card:disabled{opacity:.45; cursor:not-allowed;}
 
   .status-strip{
@@ -203,7 +209,7 @@
   <div id="login">
     <div class="brand">
       <div class="mark">☕</div>
-      <h1>HR بهار</h1>
+      <h1>HR بهار ودله</h1>
       <p>نظام حضور مؤسسة بهار ودلة</p>
     </div>
     <div class="field" id="login-id-wrap">
@@ -258,6 +264,7 @@
           <button class="task-card add-emp" id="card-add-employee-home"><span class="ic">➕👤</span><span class="lbl">إضافة موظف</span></button>
           <button class="task-card add-branch" id="card-add-branch-home"><span class="ic">➕📍</span><span class="lbl">إضافة فرع</span></button>
           <button class="task-card announce" id="card-announce"><span class="ic">📢</span><span class="lbl">إرسال تعميم</span></button>
+          <button class="task-card schedule" id="card-schedule-home"><span class="ic">🗂️</span><span class="lbl">جدولة الدوام</span></button>
         </div>
       </div>
 
@@ -272,15 +279,33 @@
       <div class="view" id="view-team">
         <div class="section-title" style="display:flex; justify-content:space-between; align-items:center;">
           <span>ملخص هذا الشهر</span>
-          <button class="btn-ghost" style="padding:6px 12px; font-size:12px;" id="btn-report-team">📄 تقرير PDF</button>
+          <div style="display:flex; gap:6px;">
+            <button class="btn-ghost" style="padding:6px 12px; font-size:12px;" id="btn-export-team">🧮 Excel</button>
+            <button class="btn-ghost" style="padding:6px 12px; font-size:12px;" id="btn-report-team">📄 PDF</button>
+          </div>
         </div>
         <div id="team-summary"></div>
+
+        <div class="section-title">أداء الفروع (هذا الشهر)</div>
+        <div class="card-plain" id="team-branch-dash"></div>
+
+        <div class="section-title" id="team-salary-title" style="display:none;">الرواتب (هذا الشهر، تقديري)</div>
+        <div class="card-plain" id="team-salary" style="display:none;"></div>
 
         <div class="section-title">من في الدوام الآن</div>
         <div id="team-onshift"></div>
 
-        <div class="section-title">طلبات بانتظار القرار</div>
+        <div class="section-title" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>طلبات بانتظار القرار</span>
+          <div style="display:flex; gap:6px;">
+            <button class="btn-ghost" style="padding:6px 10px; font-size:11px;" id="btn-bulk-leave">✅ قبول كل الإجازات</button>
+            <button class="btn-ghost" style="padding:6px 10px; font-size:11px;" id="btn-bulk-money">✅ قبول كل السلف</button>
+          </div>
+        </div>
         <div id="team-pending"></div>
+
+        <div class="section-title">جدول الدوام القادم (14 يوم)</div>
+        <div id="team-schedule"></div>
 
         <div class="section-title" style="display:flex; justify-content:space-between; align-items:center;">
           <span>الفروع</span>
@@ -293,6 +318,8 @@
           <button class="btn-ghost" style="padding:6px 12px; font-size:12px;" id="btn-add-employee">+ موظف جديد</button>
         </div>
         <div id="team-list"></div>
+
+        <button class="btn-ghost" style="width:100%; margin-top:14px; display:none;" id="btn-audit-log">📜 سجل التعديلات</button>
       </div>
 
       <div class="view" id="view-profile">
@@ -304,6 +331,12 @@
 
         <div class="section-title">ملخص هذا الشهر</div>
         <div class="card-plain" id="my-summary"></div>
+
+        <div class="section-title" id="my-salary-title" style="display:none;">راتبي هذا الشهر (تقديري)</div>
+        <div class="card-plain" id="my-salary" style="display:none;"></div>
+
+        <div class="section-title" id="my-schedule-title" style="display:none;">جدولي القادم</div>
+        <div class="card-plain" id="my-schedule" style="display:none;"></div>
 
         <div class="section-title">رقم الواتساب</div>
         <div class="card-plain">
@@ -318,7 +351,10 @@
           <button class="btn-ghost" style="width:100%;" id="btn-change-pin">تحديث الرمز السري</button>
         </div>
 
-        <button class="btn-primary" style="width:100%; margin-bottom:10px;" id="btn-report-mine">📄 تقرير حضوري الشهري (PDF)</button>
+        <div style="display:flex; gap:8px; margin-bottom:10px;">
+          <button class="btn-primary" style="flex:1;" id="btn-report-mine">📄 تقرير PDF</button>
+          <button class="btn-ghost" style="flex:1;" id="btn-export-mine">🧮 تصدير Excel</button>
+        </div>
         <button class="btn-ghost" style="width:100%; margin-bottom:10px;" id="btn-add-home">📲 إضافة التطبيق للشاشة الرئيسية</button>
         <button class="btn-ghost" style="width:100%;" id="btn-logout">تسجيل الخروج</button>
       </div>
@@ -348,14 +384,30 @@ function toast(msg){
   setTimeout(()=>t.classList.remove('show'), 2600);
 }
 function isManager(){ return ME && (ME.Role==='admin' || ME.Role==='supervisor'); }
+function isAdmin(){ return ME && ME.Role==='admin'; }
 
-async function jsonpRequest(action, params={}){
+async function fetchWithTimeout(url, ms){
+  const ctrl = new AbortController();
+  const timer = setTimeout(()=>ctrl.abort(), ms);
+  try{ return await fetch(url, {cache:'no-store', signal:ctrl.signal}); }
+  finally{ clearTimeout(timer); }
+}
+// إعادة محاولة تلقائية مرة واحدة: كثير من حالات "انقطاع الاتصال" سببها انقطاع لحظي بالشبكة
+// أو تأخر الاستجابة قليلاً، لا مشكلة فعلية بالخادم. الآن أي طلب فاشل يُعاد تلقائياً بصمت قبل إظهار خطأ للمستخدم.
+async function jsonpRequest(action, params={}, _isRetry){
+  if(!navigator.onLine){
+    return {success:false, error:'لا يوجد اتصال بالإنترنت حالياً، تحقق من الشبكة وحاول مجدداً'};
+  }
   const q = new URLSearchParams({action, employeeId:(ME?ME.EmployeeID:''), token:TOKEN, _t:Date.now()+'_'+Math.random().toString(36).slice(2), ...params});
   try{
-    const res = await fetch(API + '?' + q.toString(), {cache:'no-store'});
+    const res = await fetchWithTimeout(API + '?' + q.toString(), 20000);
     return await res.json();
   }catch(e){
-    return {success:false, error:'تعذر الاتصال بالخادم، تحقق من الإنترنت'};
+    if(!_isRetry){
+      await new Promise(r=>setTimeout(r, 900));
+      return jsonpRequest(action, params, true);
+    }
+    return {success:false, error:'تعذر الاتصال بالخادم، تحقق من الإنترنت وحاول مجدداً'};
   }
 }
 async function apiGet(action, params={}){ return jsonpRequest(action, params); }
@@ -425,6 +477,9 @@ async function enterApp(){
   document.querySelector('[data-view="team"]').style.display = isManager()?'flex':'none';
   document.getElementById('mgmt-tools').style.display = isManager()?'grid':'none';
   document.getElementById('mgmt-title').style.display = isManager()?'block':'none';
+  document.getElementById('team-salary-title').style.display = isAdmin()?'block':'none';
+  document.getElementById('team-salary').style.display = isAdmin()?'block':'none';
+  document.getElementById('btn-audit-log').style.display = isAdmin()?'block':'none';
   await refreshSnapshot();
   scheduleShiftAlert();
   setInterval(pollNotifications, 45000);
@@ -440,7 +495,7 @@ async function refreshSnapshot(){
     if(!j.success){ toast(j.error||'تعذر تحميل البيانات'); return; }
     SNAP = j.data; BRANCHES = SNAP.branches;
     renderBranchPicker(); renderTodayStatus(); renderNotifBadge();
-    renderRequests(); renderTeam(); renderMySummary();
+    renderRequests(); renderTeam(); renderMySummary(); renderMySalary(); renderMySchedule();
   } finally { REFRESHING = false; }
 }
 
@@ -455,6 +510,45 @@ function renderMySummary(){
     <div class="req-item"><span class="l">أيام الحضور</span><b>${days}</b></div>
     <div class="req-item"><span class="l">السلف المعتمدة</span><b>${advances}</b></div>
     <div class="req-item"><span class="l">طلبات إجازة/استئذان</span><b>${permissions}</b></div>`;
+}
+// راتب تقديري: الراتب الأساسي - (أيام غياب تقديرية × قسط اليوم) - السلف المعتمدة هذا الشهر
+// أيام الغياب = أيام الشهر حتى اليوم - أيام الحضور - أيام الإجازة/الاستئذان المعتمدة (تقدير تقريبي وليس دقيقاً 100%)
+function computeNetSalary(emp, attendanceRows, moneyRows, leaveRows){
+  const base = Number(emp.BaseSalary||0);
+  if(!base) return null;
+  const thisMonth = new Date().toISOString().slice(0,7);
+  const daysSoFar = new Date().getDate();
+  const presentDays = new Set(attendanceRows.filter(a=>String(a.EmployeeID)===String(emp.EmployeeID) && monthKey(a.Date)===thisMonth).map(a=>a.Date)).size;
+  const approvedLeaveDays = leaveRows.filter(l=>String(l.EmployeeID)===String(emp.EmployeeID) && l.Status==='approved' && monthKey(l.DateFrom)===thisMonth).length;
+  const perDay = base/30;
+  const absentDays = Math.max(0, daysSoFar - presentDays - approvedLeaveDays);
+  const deduction = Math.round(perDay*absentDays);
+  const advances = moneyRows.filter(m=>String(m.EmployeeID)===String(emp.EmployeeID) && m.Status==='approved' && monthKey(m.Date)===thisMonth).reduce((s,m)=>s+Number(m.Amount||0),0);
+  const net = Math.round(base - deduction - advances);
+  return {base, presentDays, absentDays, deduction, advances, net};
+}
+function renderMySalary(){
+  const wrapTitle = document.getElementById('my-salary-title'), wrap = document.getElementById('my-salary');
+  if(!SNAP || !ME || !ME.BaseSalary){ wrapTitle.style.display='none'; wrap.style.display='none'; return; }
+  const s = computeNetSalary(ME, SNAP.attendance||[], SNAP.money||[], SNAP.leaves||[]);
+  if(!s){ wrapTitle.style.display='none'; wrap.style.display='none'; return; }
+  wrapTitle.style.display='block'; wrap.style.display='block';
+  wrap.innerHTML = `
+    <div class="req-item"><span class="l">الراتب الأساسي</span><b>${s.base}</b></div>
+    <div class="req-item"><span class="l">خصم غياب تقديري (${s.absentDays} يوم)</span><b>-${s.deduction}</b></div>
+    <div class="req-item"><span class="l">السلف المعتمدة</span><b>-${s.advances}</b></div>
+    <div class="req-item"><span class="l">الصافي التقديري</span><b style="color:var(--clay-500);">${s.net}</b></div>`;
+}
+function renderMySchedule(){
+  const wrapTitle = document.getElementById('my-schedule-title'), wrap = document.getElementById('my-schedule');
+  if(!SNAP || !ME || !(SNAP.schedule||[]).length){ wrapTitle.style.display='none'; wrap.style.display='none'; return; }
+  const mine = (SNAP.schedule||[]).filter(s=>String(s.EmployeeID)===String(ME.EmployeeID)).sort((a,b)=>a.Date.localeCompare(b.Date));
+  if(!mine.length){ wrapTitle.style.display='none'; wrap.style.display='none'; return; }
+  wrapTitle.style.display='block'; wrap.style.display='block';
+  const branchName = id => (BRANCHES.find(b=>b.BranchID===id)||{}).Name || id;
+  wrap.innerHTML = mine.map(s=>`
+    <div class="req-item"><div><div class="l">${s.Date}</div><div class="d">${branchName(s.BranchID)}${s.ShiftStart?' · '+s.ShiftStart+(s.ShiftEnd?'-'+s.ShiftEnd:''):''}</div></div></div>
+  `).join('');
 }
 function renderTeamSummary(){
   if(!SNAP || !isManager()) return;
@@ -525,23 +619,28 @@ async function doCheck(action){
 }
 
 /* ---------- Geofence exit watcher (while checked in) ---------- */
-let GEO_WATCH_ID = null, OUTSIDE_STREAK = 0, EXIT_ALERTED = false;
+// تنبيه فوري (من أول قراءة خارج النطاق، بدون انتظار)، مع تكرار قوي كل دقيقتين طالما الموظف مستمر بالخروج
+function exitAlertChime(){ playTone([880,440,880,440,880], .15, .03, 'square', .3); }
+let GEO_WATCH_ID = null, LAST_EXIT_ALERT_AT = 0;
 function startGeofenceWatch(){
   if(!navigator.geolocation || GEO_WATCH_ID!==null) return;
-  OUTSIDE_STREAK = 0; EXIT_ALERTED = false;
+  LAST_EXIT_ALERT_AT = 0;
   GEO_WATCH_ID = navigator.geolocation.watchPosition(pos=>{
     const b = BRANCHES.find(x=>x.BranchID===CURRENT_BRANCH);
     if(!b || !b.Lat) return;
     const dist = distanceMetersJS(pos.coords.latitude, pos.coords.longitude, Number(b.Lat), Number(b.Lng));
     if(dist > Number(b.RadiusMeters||100) + 60){
-      OUTSIDE_STREAK++;
-      if(OUTSIDE_STREAK>=2 && !EXIT_ALERTED){
-        EXIT_ALERTED = true; errorChime();
+      const now = Date.now();
+      if(now - LAST_EXIT_ALERT_AT > 120000){ // فوري أول مرة، ثم تذكير كل دقيقتين طالما مستمر بالخروج
+        LAST_EXIT_ALERT_AT = now;
+        exitAlertChime();
+        if(navigator.vibrate) navigator.vibrate([300,120,300,120,300]);
         toast('⚠ أنت خارج نطاق الفرع أثناء الدوام');
+        if(window.Notification && Notification.permission==='granted') new Notification('HR بهار ودله', {body:'⚠ أنت خارج نطاق الفرع أثناء الدوام، الرجاء العودة أو تسجيل الانصراف'});
         apiPost('exitAlert', {}).catch(()=>{});
       }
-    } else { OUTSIDE_STREAK = 0; EXIT_ALERTED = false; }
-  }, ()=>{}, {enableHighAccuracy:true, maximumAge:20000});
+    } else { LAST_EXIT_ALERT_AT = 0; }
+  }, ()=>{}, {enableHighAccuracy:true, maximumAge:5000, timeout:15000});
 }
 function stopGeofenceWatch(){
   if(GEO_WATCH_ID!==null && navigator.geolocation){ navigator.geolocation.clearWatch(GEO_WATCH_ID); GEO_WATCH_ID=null; }
@@ -625,9 +724,67 @@ function renderRequests(){
 
 /* ---------- Team (manager) ---------- */
 document.getElementById('card-team-shortcut').onclick = ()=>switchView('team');
+function renderBranchDash(){
+  const wrap = document.getElementById('team-branch-dash');
+  if(!wrap) return;
+  if(!SNAP || !isManager() || !(SNAP.branches||[]).length){ wrap.innerHTML=''; return; }
+  const thisMonth = new Date().toISOString().slice(0,7);
+  const empShift = id => (SNAP.employees||[]).find(e=>String(e.EmployeeID)===String(id)) || {};
+  const rows = (SNAP.branches||[]).map(b=>{
+    const rows = (SNAP.attendance||[]).filter(a=>a.BranchID===b.BranchID && monthKey(a.Date)===thisMonth && a.CheckIn);
+    const total = rows.length;
+    let late = 0;
+    rows.forEach(a=>{
+      const emp = empShift(a.EmployeeID);
+      const shiftMins = [emp.ShiftStart, emp.ShiftStart2].filter(s=>/^\d{1,2}:\d{2}$/.test(s||'')).map(s=>{ const [h,m]=s.split(':').map(Number); return h*60+m; });
+      if(!shiftMins.length) return;
+      const hh = Number(String(a.CheckIn).slice(11,13)), mm = Number(String(a.CheckIn).slice(14,16));
+      if(isNaN(hh)) return;
+      const checkinMins = hh*60+mm;
+      let diff = Math.min(...shiftMins.map(sm=>Math.abs(checkinMins-sm)));
+      const closest = shiftMins.find(sm=>Math.abs(checkinMins-sm)===diff);
+      if(checkinMins > closest+10) late++;
+    });
+    const onTimePct = total ? Math.round(((total-late)/total)*100) : 0;
+    return {name:b.Name, total, onTimePct};
+  });
+  const maxTotal = Math.max(1, ...rows.map(r=>r.total));
+  wrap.innerHTML = rows.map(r=>`
+    <div class="bar-row"><span class="bl">${r.name}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.round(r.total/maxTotal*100)}%;"></div></div><span class="bar-val">${r.total} حضور</span></div>
+    <div class="bar-row"><span class="bl" style="color:var(--ink-600); font-size:11px;">الالتزام بالوقت</span><div class="bar-track"><div class="bar-fill" style="width:${r.onTimePct}%; background:linear-gradient(90deg,#5B6B3A,#7C8F4E);"></div></div><span class="bar-val">${r.onTimePct}%</span></div>
+  `).join('') || '<div class="empty">لا توجد بيانات كافية بعد</div>';
+}
+function renderTeamSalary(){
+  const wrap = document.getElementById('team-salary');
+  if(!wrap) return;
+  if(!SNAP || !isAdmin()){ wrap.innerHTML=''; return; }
+  const rows = (SNAP.employees||[]).map(e=>({name:e.Name, s:computeNetSalary(e, SNAP.attendance||[], SNAP.money||[], SNAP.leaves||[])})).filter(r=>r.s);
+  wrap.innerHTML = rows.length ? rows.map(r=>`
+    <div class="req-item"><span class="l">${r.name}</span><b>${r.s.net}</b></div>
+  `).join('') : '<div class="empty">لا يوجد رواتب محدّدة بعد (أضفها من صفحة تعديل الموظف)</div>';
+}
+function renderTeamSchedule(){
+  const wrap = document.getElementById('team-schedule');
+  if(!wrap) return;
+  if(!SNAP || !isManager()){ wrap.innerHTML=''; return; }
+  const empName = id => (SNAP.employees.find(e=>String(e.EmployeeID)===String(id))||{}).Name || id;
+  const branchName = id => (SNAP.branches.find(b=>b.BranchID===id)||{}).Name || id;
+  const rows = (SNAP.schedule||[]).sort((a,b)=>a.Date.localeCompare(b.Date));
+  wrap.innerHTML = rows.length ? rows.map(s=>`
+    <div class="req-item"><div><div class="l">${empName(s.EmployeeID)} — ${s.Date}</div><div class="d">${branchName(s.BranchID)}${s.ShiftStart?' · '+s.ShiftStart+(s.ShiftEnd?'-'+s.ShiftEnd:''):''}</div></div>
+    <button class="btn-ghost" style="padding:6px 10px; font-size:11px;" onclick="deleteScheduleEntry('${s.ID}')">حذف</button></div>
+  `).join('') : '<div class="empty">لا يوجد جدول دوام مضاف بعد</div>';
+}
+window.deleteScheduleEntry = async (scheduleId)=>{
+  const j = await apiPost('deleteScheduleEntry', {scheduleId});
+  if(j.success){ successChime(); toast('تم الحذف'); await refreshSnapshot(); } else { errorChime(); toast(j.error||'خطأ'); }
+};
 function renderTeam(){
   if(!SNAP || !isManager()) return;
   renderTeamSummary();
+  renderBranchDash();
+  renderTeamSalary();
+  renderTeamSchedule();
   const pendLeaves = (SNAP.leaves||[]).filter(l=>l.Status==='pending');
   const pendMoney = (SNAP.money||[]).filter(m=>m.Status==='pending');
   const empName = id => (SNAP.employees.find(e=>String(e.EmployeeID)===String(id))||{}).Name || id;
@@ -719,19 +876,32 @@ function openAddEmployeeSheet(){
         <option value="employee">موظف</option><option value="supervisor">مشرف</option><option value="admin">مدير عام</option>
       </select>
     </div>
-    <div class="field" style="margin-bottom:10px;"><label>وقت بدء الدوام</label><input type="time" id="ne-start"></div>
-    <div class="field" style="margin-bottom:10px;"><label>وقت نهاية الدوام</label><input type="time" id="ne-end"></div>
+    <div class="field" style="margin-bottom:10px;"><label>وقت بدء الدوام (الشفت الأول)</label><input type="time" id="ne-start"></div>
+    <div class="field" style="margin-bottom:10px;"><label>وقت نهاية الدوام (الشفت الأول)</label><input type="time" id="ne-end"></div>
+    <label style="display:flex; align-items:center; gap:8px; padding:8px 0; font-size:13px; font-weight:700; color:var(--ink-600);">
+      <input type="checkbox" id="ne-has-shift2"> هذا الموظف لديه شفت ثاني باليوم
+    </label>
+    <div id="ne-shift2-wrap" style="display:none;">
+      <div class="field" style="margin-bottom:10px;"><label>وقت بدء الشفت الثاني</label><input type="time" id="ne-start2"></div>
+      <div class="field" style="margin-bottom:10px;"><label>وقت نهاية الشفت الثاني</label><input type="time" id="ne-end2"></div>
+    </div>
     <div id="ne-branches-wrap"><label style="font-size:13px; font-weight:700; color:var(--ink-600);">الفروع (للموظف فقط)</label>${branchCheckboxes('')}</div>
+    ${isAdmin() ? `<div class="field" style="margin-bottom:10px;"><label>الراتب الأساسي (اختياري، للمدير العام فقط)</label><input type="number" id="ne-salary" placeholder="0"></div>` : ''}
     <button class="btn-primary" style="width:100%; margin-top:10px;" id="ne-submit">إضافة الموظف</button>
   `);
+  document.getElementById('ne-has-shift2').onchange = (e)=>{ document.getElementById('ne-shift2-wrap').style.display = e.target.checked?'block':'none'; };
   document.getElementById('ne-submit').onclick = async ()=>{
     const name = document.getElementById('ne-name').value.trim(), pin = document.getElementById('ne-pin').value.trim();
     if(!name || !pin){ toast('اكتب الاسم والرمز السري'); return; }
     const branchIds = [...document.querySelectorAll('.emp-branch-cb:checked')].map(c=>c.value).join(',');
+    const hasShift2 = document.getElementById('ne-has-shift2').checked;
+    const salaryEl = document.getElementById('ne-salary');
     const j = await apiPost('addEmployee', {
       name, pin, whatsapp:document.getElementById('ne-whatsapp').value.trim(),
       role:document.getElementById('ne-role').value, branchIds,
-      shiftStart:document.getElementById('ne-start').value, shiftEnd:document.getElementById('ne-end').value
+      shiftStart:document.getElementById('ne-start').value, shiftEnd:document.getElementById('ne-end').value,
+      shiftStart2: hasShift2?document.getElementById('ne-start2').value:'', shiftEnd2: hasShift2?document.getElementById('ne-end2').value:'',
+      baseSalary: salaryEl ? salaryEl.value : ''
     });
     if(j.success){ successChime(); toast('تمت إضافة الموظف ✅'); closeSheet(); await refreshSnapshot(); } else { errorChime(); toast(j.error||'خطأ'); }
   };
@@ -739,18 +909,25 @@ function openAddEmployeeSheet(){
 document.getElementById('btn-add-employee').onclick = openAddEmployeeSheet;
 document.getElementById('card-add-employee-home').onclick = openAddEmployeeSheet;
 
-/* ---------- Performance evaluation ---------- */
-function computePerf(employeeId, shiftStart){
+/* ---------- Performance evaluation (supports employees with two shifts/day) ---------- */
+function computePerf(employeeId, shiftStart, shiftStart2){
   const thisMonth = new Date().toISOString().slice(0,7);
   const rows = (SNAP.attendance||[]).filter(a=>String(a.EmployeeID)===String(employeeId) && monthKey(a.Date)===thisMonth && a.CheckIn);
   const days = rows.length;
-  const validShift = /^\d{1,2}:\d{2}$/.test(shiftStart||'');
+  const shiftMins = [shiftStart, shiftStart2].filter(s=>/^\d{1,2}:\d{2}$/.test(s||'')).map(s=>{
+    const [h,m] = s.split(':').map(Number); return h*60+m;
+  });
+  const validShift = shiftMins.length > 0;
   let late = 0;
   if(validShift){
-    const [sh,sm] = shiftStart.split(':').map(Number);
     rows.forEach(a=>{
       const hh = Number(String(a.CheckIn).slice(11,13)), mm = Number(String(a.CheckIn).slice(14,16));
-      if(!isNaN(hh) && (hh*60+mm) > (sh*60+sm+10)) late++;
+      if(isNaN(hh)) return;
+      const checkinMins = hh*60+mm;
+      // إذا للموظف شفتان، نقارن وقت حضوره بأقرب شفت له (لا نحمّله تأخير شفت آخر لا يخصه الآن)
+      let closest = shiftMins[0], diff = Math.abs(checkinMins - shiftMins[0]);
+      shiftMins.forEach(sm=>{ const d = Math.abs(checkinMins-sm); if(d<diff){ diff=d; closest=sm; } });
+      if(checkinMins > closest + 10) late++;
     });
   }
   const onTimePct = (days && validShift) ? Math.round(((days-late)/days)*100) : null;
@@ -759,13 +936,13 @@ function computePerf(employeeId, shiftStart){
 document.getElementById('card-perf').onclick = ()=>{
   if(!SNAP) return;
   if(isManager()){
-    const rows = (SNAP.employees||[]).map(e=>({name:e.Name, ...computePerf(e.EmployeeID, e.ShiftStart)}));
+    const rows = (SNAP.employees||[]).map(e=>({name:e.Name, ...computePerf(e.EmployeeID, e.ShiftStart, e.ShiftStart2)}));
     openSheet('<h3>تقييم أداء الفريق (هذا الشهر)</h3>' + (rows.map(r=>`
       <div class="req-item"><div><div class="l">${r.name}</div><div class="d">${r.days} يوم حضور${r.validShift?' · تأخر '+r.late+' مرة':''}</div></div>
       ${r.onTimePct!==null?'<b>'+r.onTimePct+'%</b>':'<span style="color:var(--ink-600); font-size:11px;">لا دوام محدد</span>'}</div>
     `).join('') || '<div class="empty">لا يوجد موظفون</div>'));
   } else {
-    const perf = computePerf(ME.EmployeeID, ME.ShiftStart);
+    const perf = computePerf(ME.EmployeeID, ME.ShiftStart, ME.ShiftStart2);
     openSheet(`<h3>أدائي هذا الشهر</h3>
       <div class="req-item"><span class="l">أيام الحضور</span><b>${perf.days}</b></div>
       ${perf.validShift ? `<div class="req-item"><span class="l">مرات التأخير</span><b>${perf.late}</b></div>
@@ -801,16 +978,32 @@ window.openEditEmployee = (employeeId)=>{
       </select>
     </div>
     <div id="ee-branches-wrap"><label style="font-size:13px; font-weight:700; color:var(--ink-600);">نقل/تعيين الفروع (للموظف فقط)</label>${branchCheckboxes(e.BranchIDs)}</div>
+    <div class="field" style="margin-bottom:10px;"><label>وقت بدء الدوام (الشفت الأول)</label><input type="time" id="ee-start" value="${e.ShiftStart||''}"></div>
+    <div class="field" style="margin-bottom:10px;"><label>وقت نهاية الدوام (الشفت الأول)</label><input type="time" id="ee-end" value="${e.ShiftEnd||''}"></div>
+    <label style="display:flex; align-items:center; gap:8px; padding:8px 0; font-size:13px; font-weight:700; color:var(--ink-600);">
+      <input type="checkbox" id="ee-has-shift2" ${e.ShiftStart2?'checked':''}> هذا الموظف لديه شفت ثاني باليوم
+    </label>
+    <div id="ee-shift2-wrap" style="display:${e.ShiftStart2?'block':'none'};">
+      <div class="field" style="margin-bottom:10px;"><label>وقت بدء الشفت الثاني</label><input type="time" id="ee-start2" value="${e.ShiftStart2||''}"></div>
+      <div class="field" style="margin-bottom:10px;"><label>وقت نهاية الشفت الثاني</label><input type="time" id="ee-end2" value="${e.ShiftEnd2||''}"></div>
+    </div>
     <label style="display:flex; align-items:center; gap:8px; padding:10px 0; font-size:14px;">
       <input type="checkbox" id="ee-active" ${e.Active!==false?'checked':''}> الحساب مفعّل
     </label>
+    ${isAdmin() ? `<div class="field" style="margin-bottom:10px;"><label>الراتب الأساسي (للمدير العام فقط)</label><input type="number" id="ee-salary" value="${e.BaseSalary||''}" placeholder="0"></div>` : ''}
     <button class="btn-primary" style="width:100%; margin-top:6px;" id="ee-submit">حفظ التعديلات</button>
   `);
+  document.getElementById('ee-has-shift2').onchange = (ev)=>{ document.getElementById('ee-shift2-wrap').style.display = ev.target.checked?'block':'none'; };
   document.getElementById('ee-submit').onclick = async ()=>{
     const branchIds = [...document.querySelectorAll('.emp-branch-cb:checked')].map(c=>c.value).join(',');
+    const hasShift2 = document.getElementById('ee-has-shift2').checked;
+    const salaryEl = document.getElementById('ee-salary');
     const j = await apiPost('updateEmployee', {
       employeeId, role:document.getElementById('ee-role').value, branchIds,
-      Active:document.getElementById('ee-active').checked
+      ShiftStart:document.getElementById('ee-start').value, ShiftEnd:document.getElementById('ee-end').value,
+      ShiftStart2: hasShift2?document.getElementById('ee-start2').value:'', ShiftEnd2: hasShift2?document.getElementById('ee-end2').value:'',
+      Active:document.getElementById('ee-active').checked,
+      BaseSalary: salaryEl ? salaryEl.value : undefined
     });
     if(j.success){ successChime(); toast('تم حفظ التعديلات ✅'); closeSheet(); await refreshSnapshot(); } else { errorChime(); toast(j.error||'خطأ'); }
   };
@@ -866,18 +1059,26 @@ function successChime(){ playTone([880,1318], .1, .035, 'sine', .2); showSuccess
 function errorChime(){ playTone([300,220], .16, .02, 'sine', .14); }                        // نغمة هابطة ناعمة: خطأ/رفض
 function pingNotify(){ playTone([988,1568], .09, .06, 'sine', .17); }                       // نغمة إشعار عصرية على غرار تنبيهات الهاتف
 function shiftChime(){ playTone([784,988,1318], .15, .06, 'sine', .24); }                   // ثلاث نغمات دافئة: تنبيه الدوام
+// يدعم موظفاً له شفتان باليوم: يتحقق من كل شفت بشكل مستقل بمفتاح تخزين خاص به
+function checkOneShiftAlert(shiftStart, tag){
+  if(!ME || !/^\d{1,2}:\d{2}$/.test(shiftStart||'')) return;
+  const [h,m] = shiftStart.split(':').map(Number);
+  const now = new Date();
+  const shift = new Date(); shift.setHours(h, m, 0, 0);
+  const diffMin = Math.round((shift-now)/60000);
+  const key = 'hrb_alerted_'+tag+'_'+now.toISOString().slice(0,10);
+  if(diffMin===30 && !localStorage.getItem(key)){
+    localStorage.setItem(key,'1'); shiftChime();
+    const msg = tag==='s2' ? '⏰ شفتك الثاني يبدأ خلال 30 دقيقة' : '⏰ دوامك يبدأ خلال 30 دقيقة';
+    toast(msg);
+    if(Notification && Notification.permission==='granted') new Notification('HR بهار ودله', {body:msg});
+  }
+}
 function scheduleShiftAlert(){
   setInterval(()=>{
-    if(!ME || !/^\d{1,2}:\d{2}$/.test(ME.ShiftStart||'')) return;
-    const [h,m] = ME.ShiftStart.split(':').map(Number);
-    const now = new Date();
-    const shift = new Date(); shift.setHours(h, m, 0, 0);
-    const diffMin = Math.round((shift-now)/60000);
-    const key = 'hrb_alerted_'+now.toISOString().slice(0,10);
-    if(diffMin===30 && !localStorage.getItem(key)){
-      localStorage.setItem(key,'1'); shiftChime(); toast('⏰ دوامك يبدأ خلال 30 دقيقة');
-      if(Notification && Notification.permission==='granted') new Notification('HR بهار', {body:'دوامك يبدأ خلال 30 دقيقة'});
-    }
+    if(!ME) return;
+    checkOneShiftAlert(ME.ShiftStart, 's1');
+    checkOneShiftAlert(ME.ShiftStart2, 's2');
   }, 60000);
   if(window.Notification && Notification.permission==='default') Notification.requestPermission();
 }
@@ -974,6 +1175,98 @@ document.getElementById('btn-report-team').onclick = ()=>{
       ${leaves.map(l=>`<tr><td>${empName(l.EmployeeID)}</td><td>${l.Type==='leave'?'إجازة':'استئذان'}</td><td>${l.DateFrom}</td><td>${l.DateTo}</td><td>${l.Status==='approved'?'مقبول':l.Status==='rejected'?'مرفوض':'قيد الانتظار'}</td></tr>`).join('') || '<tr><td colspan="5">لا يوجد طلبات</td></tr>'}
     </table>
   `);
+};
+
+/* ---------- Excel export (CSV, يفتح مباشرة في Excel) ---------- */
+function downloadCsv(filename, rows){
+  // BOM في البداية لضمان ظهور الحروف العربية بشكل صحيح داخل Excel
+  const csv = '﻿' + rows.map(r=>r.map(c=>'"'+String(c==null?'':c).replace(/"/g,'""')+'"').join(',')).join('\r\n');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 2000);
+}
+document.getElementById('btn-export-mine').onclick = ()=>{
+  if(!SNAP) return;
+  const mine = id => String(id)===String(ME.EmployeeID);
+  const thisMonth = new Date().toISOString().slice(0,7);
+  const att = (SNAP.attendance||[]).filter(a=>mine(a.EmployeeID) && monthKey(a.Date)===thisMonth).sort((a,b)=>a.Date.localeCompare(b.Date));
+  const rows = [['التاريخ','الحضور','الانصراف']];
+  att.forEach(a=>rows.push([a.Date, String(a.CheckIn).slice(11,16)||'-', String(a.CheckOut).slice(11,16)||'-']));
+  downloadCsv('تقرير_'+ME.Name+'_'+thisMonth+'.csv', rows);
+};
+document.getElementById('btn-export-team').onclick = ()=>{
+  if(!SNAP || !isManager()) return;
+  const thisMonth = new Date().toISOString().slice(0,7);
+  const empName = id => (SNAP.employees.find(e=>String(e.EmployeeID)===String(id))||{}).Name || id;
+  const byEmp = {};
+  (SNAP.attendance||[]).filter(a=>monthKey(a.Date)===thisMonth).forEach(a=>{ byEmp[a.EmployeeID] = byEmp[a.EmployeeID]||new Set(); byEmp[a.EmployeeID].add(a.Date); });
+  const rows = [['الموظف','عدد أيام الحضور']];
+  Object.keys(byEmp).forEach(id=>rows.push([empName(id), byEmp[id].size]));
+  downloadCsv('تقرير_الفريق_'+thisMonth+'.csv', rows);
+};
+
+/* ---------- Bulk approve ---------- */
+document.getElementById('btn-bulk-leave').onclick = async ()=>{
+  const pend = (SNAP.leaves||[]).filter(l=>l.Status==='pending');
+  if(!pend.length){ toast('لا توجد طلبات إجازة معلّقة'); return; }
+  toast('جارٍ قبول '+pend.length+' طلب...');
+  for(const l of pend){ await apiPost('decideLeave', {leaveId:l.ID, decision:'approved'}); }
+  successChime(); toast('تم قبول جميع طلبات الإجازة/الاستئذان ✅'); await refreshSnapshot();
+};
+document.getElementById('btn-bulk-money').onclick = async ()=>{
+  const pend = (SNAP.money||[]).filter(m=>m.Status==='pending');
+  if(!pend.length){ toast('لا توجد طلبات سلفة معلّقة'); return; }
+  toast('جارٍ قبول '+pend.length+' طلب...');
+  for(const m of pend){ await apiPost('decideMoney', {moneyId:m.ID, decision:'approved'}); }
+  successChime(); toast('تم قبول جميع طلبات السلف ✅'); await refreshSnapshot();
+};
+
+/* ---------- Weekly shift scheduling ---------- */
+function employeeOptions(){
+  return (SNAP.employees||[]).map(e=>`<option value="${e.EmployeeID}">${e.Name}</option>`).join('');
+}
+function branchOptions(){
+  return (SNAP.branches||[]).map(b=>`<option value="${b.BranchID}">${b.Name}</option>`).join('');
+}
+function openScheduleSheet(){
+  if(!SNAP) return;
+  openSheet(`
+    <h3>جدولة دوام موظف</h3>
+    <div class="field" style="margin-bottom:10px;"><label>الموظف</label>
+      <select id="sc-emp" style="padding:14px; border-radius:14px; border:1.5px solid var(--cream-200); background:var(--cream-100); color:var(--ink-900);">${employeeOptions()}</select>
+    </div>
+    <div class="field" style="margin-bottom:10px;"><label>الفرع</label>
+      <select id="sc-branch" style="padding:14px; border-radius:14px; border:1.5px solid var(--cream-200); background:var(--cream-100); color:var(--ink-900);">${branchOptions()}</select>
+    </div>
+    <div class="field" style="margin-bottom:10px;"><label>التاريخ</label><input type="date" id="sc-date"></div>
+    <div class="field" style="margin-bottom:10px;"><label>وقت البدء</label><input type="time" id="sc-start"></div>
+    <div class="field" style="margin-bottom:16px;"><label>وقت النهاية</label><input type="time" id="sc-end"></div>
+    <button class="btn-primary" style="width:100%;" id="sc-submit">إضافة للجدول</button>
+  `);
+  document.getElementById('sc-submit').onclick = async ()=>{
+    const date = document.getElementById('sc-date').value;
+    if(!date){ toast('حدد التاريخ'); return; }
+    const j = await apiPost('addScheduleEntry', {
+      employeeId: document.getElementById('sc-emp').value, branchId: document.getElementById('sc-branch').value,
+      date, shiftStart: document.getElementById('sc-start').value, shiftEnd: document.getElementById('sc-end').value
+    });
+    if(j.success){ successChime(); toast('تمت إضافة الجدولة ✅'); closeSheet(); await refreshSnapshot(); } else { errorChime(); toast(j.error||'خطأ'); }
+  };
+}
+document.getElementById('card-schedule-home').onclick = openScheduleSheet;
+
+/* ---------- Audit log (admin only) ---------- */
+document.getElementById('btn-audit-log').onclick = async ()=>{
+  if(!isAdmin()) return;
+  const j = await apiGet('auditLog');
+  if(!j.success){ errorChime(); toast(j.error||'تعذر تحميل السجل'); return; }
+  const rows = j.data.log || [];
+  openSheet('<h3>سجل التعديلات (آخر 150)</h3>' + (rows.map(r=>`
+    <div class="req-item"><div><div class="l">${r.ActorName} — ${r.Action}</div><div class="d">${r.Details||''} · ${r.Timestamp}</div></div></div>
+  `).join('') || '<div class="empty">لا يوجد سجل بعد</div>'));
 };
 
 document.getElementById('btn-refresh').onclick = async ()=>{
