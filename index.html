@@ -173,6 +173,7 @@
   }
   #sheet h3{margin:0 0 14px; font-size:16px; font-weight:800;}
   .sheet-close{position:absolute; top:14px; left:14px; background:var(--cream-200); border:none; width:32px; height:32px; border-radius:10px; font-size:14px; cursor:pointer;}
+  .sheet-back{position:absolute; top:14px; right:14px; background:var(--cream-200); border:none; padding:7px 14px; border-radius:10px; font-size:13px; font-weight:800; cursor:pointer; color:var(--ink-900);}
 
   .field select{
     padding:14px 16px; border-radius:14px; border:1.5px solid var(--cream-200); background:var(--cream-100);
@@ -657,14 +658,32 @@ document.getElementById('card-leave').onclick = ()=>openRequestSheet('leave');
 document.getElementById('card-permission').onclick = ()=>openRequestSheet('permission');
 document.getElementById('card-money').onclick = ()=>openMoneySheet();
 
+// زر "رجوع" واضح بالنص + دعم زر الرجوع الفعلي بالجهاز/المتصفح: فتح أي نافذة يسجّل
+// خطوة بسجل المتصفح، فلما يضغط المستخدم رجوع (سواء زرنا بالشاشة أو زر جهازه)
+// تُغلق النافذة فقط بدل ما يخرج من التطبيق كامل بالغلط.
 function openSheet(html){
-  document.getElementById('sheet').innerHTML = '<button class="sheet-close" id="sheet-x">✕</button>'+html;
+  document.getElementById('sheet').innerHTML =
+    '<button class="sheet-back" id="sheet-back">→ رجوع</button><button class="sheet-close" id="sheet-x">✕</button>'+html;
   document.getElementById('sheet').style.display='block';
   document.getElementById('sheet-overlay').style.display='block';
-  document.getElementById('sheet-x').onclick = closeSheet;
-  document.getElementById('sheet-overlay').onclick = closeSheet;
+  try{ history.pushState({hrbSheet:true}, ''); }catch(e){}
+  const goBack = ()=>{ try{ history.back(); }catch(e){ closeSheetUI(); } };
+  document.getElementById('sheet-x').onclick = goBack;
+  document.getElementById('sheet-back').onclick = goBack;
+  document.getElementById('sheet-overlay').onclick = goBack;
 }
-function closeSheet(){ document.getElementById('sheet').style.display='none'; document.getElementById('sheet-overlay').style.display='none'; }
+function closeSheetUI(){
+  document.getElementById('sheet').style.display='none';
+  document.getElementById('sheet-overlay').style.display='none';
+}
+function closeSheet(){
+  // تُستخدم من الكود نفسه (مثلاً بعد نجاح عملية) لإغلاق تلقائي بدون ضغطة مستخدم
+  if(document.getElementById('sheet').style.display==='block' && history.state && history.state.hrbSheet){
+    try{ history.back(); return; }catch(e){}
+  }
+  closeSheetUI();
+}
+window.addEventListener('popstate', ()=>{ closeSheetUI(); });
 
 function openRequestSheet(type){
   const title = type==='leave' ? 'طلب إجازة' : 'طلب استئذان';
