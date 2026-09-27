@@ -1034,18 +1034,41 @@ document.getElementById('btn-bell').onclick = ()=>{
 };
 
 /* ---------- Sound design: distinct chimes per action ---------- */
+// نستخدم AudioContext واحد ثابت طوال الجلسة بدل إنشاء واحد جديد بكل نغمة:
+// المتصفحات (خصوصاً على الجوال) تمنع تشغيل صوت من AudioContext يتم إنشاؤه بعد
+// عملية غير متزامنة (await/شبكة) كما يحصل بعد تسجيل الحضور، وتُبقيه "معلّق" بلا صوت.
+// الحل: نُنشئه مرة واحدة عند أول لمسة/ضغطة من المستخدم في الصفحة، ثم نستأنفه (resume)
+// في كل مرة قبل التشغيل — هذا يحل المشكلة بشكل نهائي على كل المتصفحات.
+let AUDIO_CTX = null;
+function ensureAudioCtx(){
+  if(!AUDIO_CTX){
+    try{ AUDIO_CTX = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ return null; }
+  }
+  return AUDIO_CTX;
+}
+['click','touchend','keydown'].forEach(ev=>{
+  document.addEventListener(ev, ()=>{
+    const ctx = ensureAudioCtx();
+    if(ctx && ctx.state==='suspended') ctx.resume().catch(()=>{});
+  }, {passive:true});
+});
 function playTone(freqs, dur=0.16, gap=0.05, type='sine', vol=.22){
   try{
-    const ctx = new (window.AudioContext||window.webkitAudioContext)();
-    let t = ctx.currentTime;
-    freqs.forEach(f=>{
-      const o = ctx.createOscillator(), g = ctx.createGain();
-      o.type=type; o.frequency.value=f; o.connect(g); g.connect(ctx.destination);
-      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t+0.01);
-      g.gain.exponentialRampToValueAtTime(0.001, t+dur);
-      o.start(t); o.stop(t+dur+0.02);
-      t += dur+gap;
-    });
+    const ctx = ensureAudioCtx();
+    if(!ctx) return;
+    const afterResume = ()=>{
+      let t = ctx.currentTime;
+      freqs.forEach(f=>{
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type=type; o.frequency.value=f; o.connect(g); g.connect(ctx.destination);
+        g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t+0.01);
+        g.gain.exponentialRampToValueAtTime(0.001, t+dur);
+        o.start(t); o.stop(t+dur+0.02);
+        t += dur+gap;
+      });
+    };
+    if(ctx.state==='suspended'){ ctx.resume().then(afterResume).catch(()=>{}); }
+    else afterResume();
   }catch(e){}
 }
 function showSuccessMark(){
