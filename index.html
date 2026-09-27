@@ -406,10 +406,11 @@ async function jsonpRequest(action, params={}, _isRetry){
   if(!navigator.onLine){
     return {success:false, error:'لا يوجد اتصال بالإنترنت حالياً، تحقق من الشبكة وحاول مجدداً'};
   }
-  // employeeId/token هويتك الشخصية (لتسجيل الدخول)، تُضاف دائماً في النهاية بعد بيانات
-  // العملية حتى لو صدفة احتوت بيانات العملية حقلاً بنفس الاسم (مثل تعديل موظف آخر) —
-  // بهذا لا يختلط الاثنان ولا ينكسر تسجيل دخولك بسبب موظف آخر تتعامل معه.
-  const q = new URLSearchParams({action, ...params, employeeId:(ME?ME.EmployeeID:''), token:TOKEN, _t:Date.now()+'_'+Math.random().toString(36).slice(2)});
+  const q = new URLSearchParams({action, ...params, _t:Date.now()+'_'+Math.random().toString(36).slice(2)});
+  // بعد تسجيل الدخول فقط: هويتك (رقمك ورمز جلستك) تُفرض دائماً فوق أي بيانات عملية أخرى
+  // حتى لو صدفة احتوت حقلاً بنفس الاسم (مثل تعديل موظف آخر) — بهذا لا ينكسر تسجيل دخولك.
+  // قبل الدخول (ME غير موجود بعد) نترك employeeId كما أرسلته login/resume بنفسها.
+  if(ME){ q.set('employeeId', ME.EmployeeID); q.set('token', TOKEN); }
   try{
     const res = await fetchWithTimeout(API + '?' + q.toString(), 20000);
     return await res.json();
