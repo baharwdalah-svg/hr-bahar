@@ -172,8 +172,15 @@
     max-height:80vh; overflow-y:auto;
   }
   #sheet h3{margin:0 0 14px; font-size:16px; font-weight:800;}
-  .sheet-close{position:absolute; top:14px; left:14px; background:var(--cream-200); border:none; width:32px; height:32px; border-radius:10px; font-size:14px; cursor:pointer;}
-  .sheet-back{position:absolute; top:14px; right:14px; background:var(--cream-200); border:none; padding:7px 14px; border-radius:10px; font-size:13px; font-weight:800; cursor:pointer; color:var(--ink-900);}
+  .sheet-topbar{
+    position:sticky; top:-20px; margin:-20px -20px 16px; padding:14px 20px; background:var(--cream-50);
+    z-index:5; border-bottom:1.5px solid var(--cream-200); display:flex; align-items:center;
+  }
+  .sheet-back-btn{
+    background:var(--cream-200); border:none; padding:10px 18px; border-radius:12px; font-size:14px;
+    font-weight:800; cursor:pointer; color:var(--ink-900); display:flex; align-items:center; gap:6px;
+  }
+  .sheet-back-btn:active{ background:var(--cream-300, #e5dccd); }
 
   .field select{
     padding:14px 16px; border-radius:14px; border:1.5px solid var(--cream-200); background:var(--cream-100);
@@ -399,7 +406,10 @@ async function jsonpRequest(action, params={}, _isRetry){
   if(!navigator.onLine){
     return {success:false, error:'لا يوجد اتصال بالإنترنت حالياً، تحقق من الشبكة وحاول مجدداً'};
   }
-  const q = new URLSearchParams({action, employeeId:(ME?ME.EmployeeID:''), token:TOKEN, _t:Date.now()+'_'+Math.random().toString(36).slice(2), ...params});
+  // employeeId/token هويتك الشخصية (لتسجيل الدخول)، تُضاف دائماً في النهاية بعد بيانات
+  // العملية حتى لو صدفة احتوت بيانات العملية حقلاً بنفس الاسم (مثل تعديل موظف آخر) —
+  // بهذا لا يختلط الاثنان ولا ينكسر تسجيل دخولك بسبب موظف آخر تتعامل معه.
+  const q = new URLSearchParams({action, ...params, employeeId:(ME?ME.EmployeeID:''), token:TOKEN, _t:Date.now()+'_'+Math.random().toString(36).slice(2)});
   try{
     const res = await fetchWithTimeout(API + '?' + q.toString(), 20000);
     return await res.json();
@@ -663,12 +673,12 @@ document.getElementById('card-money').onclick = ()=>openMoneySheet();
 // تُغلق النافذة فقط بدل ما يخرج من التطبيق كامل بالغلط.
 function openSheet(html){
   document.getElementById('sheet').innerHTML =
-    '<button class="sheet-back" id="sheet-back">→ رجوع</button><button class="sheet-close" id="sheet-x">✕</button>'+html;
+    '<div class="sheet-topbar"><button class="sheet-back-btn" id="sheet-back">→ رجوع</button></div>'+html;
   document.getElementById('sheet').style.display='block';
+  document.getElementById('sheet').scrollTop = 0;
   document.getElementById('sheet-overlay').style.display='block';
   try{ history.pushState({hrbSheet:true}, ''); }catch(e){}
   const goBack = ()=>{ try{ history.back(); }catch(e){ closeSheetUI(); } };
-  document.getElementById('sheet-x').onclick = goBack;
   document.getElementById('sheet-back').onclick = goBack;
   document.getElementById('sheet-overlay').onclick = goBack;
 }
@@ -1018,7 +1028,7 @@ window.openEditEmployee = (employeeId)=>{
     const hasShift2 = document.getElementById('ee-has-shift2').checked;
     const salaryEl = document.getElementById('ee-salary');
     const j = await apiPost('updateEmployee', {
-      employeeId, role:document.getElementById('ee-role').value, branchIds,
+      targetEmployeeId: employeeId, role:document.getElementById('ee-role').value, branchIds,
       ShiftStart:document.getElementById('ee-start').value, ShiftEnd:document.getElementById('ee-end').value,
       ShiftStart2: hasShift2?document.getElementById('ee-start2').value:'', ShiftEnd2: hasShift2?document.getElementById('ee-end2').value:'',
       Active:document.getElementById('ee-active').checked,
@@ -1292,7 +1302,7 @@ function openScheduleSheet(){
     const date = document.getElementById('sc-date').value;
     if(!date){ toast('حدد التاريخ'); return; }
     const j = await apiPost('addScheduleEntry', {
-      employeeId: document.getElementById('sc-emp').value, branchId: document.getElementById('sc-branch').value,
+      targetEmployeeId: document.getElementById('sc-emp').value, branchId: document.getElementById('sc-branch').value,
       date, shiftStart: document.getElementById('sc-start').value, shiftEnd: document.getElementById('sc-end').value
     });
     if(j.success){ successChime(); toast('تمت إضافة الجدولة ✅'); closeSheet(); await refreshSnapshot(); } else { errorChime(); toast(j.error||'خطأ'); }
