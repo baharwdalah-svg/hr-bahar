@@ -85,6 +85,29 @@
     background:var(--clay-500); border:2px solid var(--coffee-900); display:none;
   }
   main{flex:1; padding:18px 18px 100px;}
+
+  /* شريط الأخبار المتحرك: يعرض آخر التعاميم والقرارات بحركة مستمرة أعلى الصفحة */
+  .news-ticker{
+    display:none; align-items:center; gap:10px; background:linear-gradient(90deg,var(--clay-600),var(--cinnamon-600));
+    padding:9px 0; overflow:hidden; position:relative; flex-shrink:0;
+  }
+  .news-ticker-badge{
+    flex-shrink:0; background:rgba(0,0,0,.22); color:#fff; font-size:11px; font-weight:800;
+    padding:5px 12px; border-radius:20px; margin-inline-start:14px; white-space:nowrap;
+  }
+  .news-ticker-viewport{flex:1; overflow:hidden; white-space:nowrap; position:relative;}
+  .news-ticker-track{
+    display:inline-block; white-space:nowrap; color:#fff; font-size:13px; font-weight:700;
+    animation:ticker-scroll 30s linear infinite; padding-inline-start:100%;
+  }
+  .news-ticker-track span{margin-inline-end:48px;}
+  @keyframes ticker-scroll{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-100%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .news-ticker-track{animation:none; padding-inline-start:14px;}
+  }
   .section-title{font-size:15px; font-weight:800; margin:22px 0 12px; color:var(--ink-900);}
   .section-title:first-child{margin-top:0;}
 
@@ -247,6 +270,11 @@
         <button class="bell" id="btn-bell">🔔<span class="dot" id="bell-dot"></span></button>
       </div>
     </header>
+
+    <div class="news-ticker" id="news-ticker">
+      <div class="news-ticker-viewport"><div class="news-ticker-track" id="news-ticker-track"></div></div>
+      <span class="news-ticker-badge">📢 تعاميم</span>
+    </div>
 
     <main>
       <div class="view active" id="view-home">
@@ -510,7 +538,7 @@ async function refreshSnapshot(){
     const j = await apiGet('snapshot');
     if(!j.success){ toast(j.error||'تعذر تحميل البيانات'); return; }
     SNAP = j.data; BRANCHES = SNAP.branches;
-    renderBranchPicker(); renderTodayStatus(); renderNotifBadge();
+    renderBranchPicker(); renderTodayStatus(); renderNotifBadge(); renderNewsTicker();
     renderRequests(); renderTeam(); renderMySummary(); renderMySalary(); renderMySchedule();
   } finally { REFRESHING = false; }
 }
@@ -1078,6 +1106,16 @@ window.openEditEmployee = (employeeId)=>{
 function renderNotifBadge(){
   const unread = (SNAP.notifications||[]).filter(n=>!n.Read).length;
   document.getElementById('bell-dot').style.display = unread ? 'block' : 'none';
+}
+// شريط الأخبار المتحرك: يعرض آخر التعاميم/القرارات (المُرسلة للجميع عبر "إرسال تعميم") بحركة مستمرة
+function renderNewsTicker(){
+  const bar = document.getElementById('news-ticker');
+  const items = (SNAP.notifications||[]).filter(n=>n.Type==='announcement')
+    .sort((a,b)=>String(b.ID).localeCompare(String(a.ID))).slice(0,8);
+  if(!items.length){ bar.style.display='none'; return; }
+  document.getElementById('news-ticker-track').innerHTML =
+    items.map(n=>`<span>${n.Message.replace(/^📢\s*/,'')}</span>`).join('');
+  bar.style.display='flex';
 }
 async function pollNotifications(){
   if(!ME) return;
